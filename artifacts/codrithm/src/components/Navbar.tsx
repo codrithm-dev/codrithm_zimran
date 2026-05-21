@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { Moon, Sun, Menu, X, Code2 } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 
@@ -32,7 +32,7 @@ export function Navbar() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/90 backdrop-blur-xl border-b border-border shadow-md"
+          ? "bg-card/95 backdrop-blur-xl border-b border-border shadow-md"
           : "bg-transparent"
       }`}
     >
@@ -45,9 +45,11 @@ export function Navbar() {
               whileTap={{ scale: 0.97 }}
               data-testid="logo-link"
             >
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <Code2 className="w-4 h-4 text-primary-foreground" />
-              </div>
+              <img
+                src="/codrithm-logo.svg"
+                alt="Codrithm"
+                className="w-8 h-8 object-contain"
+              />
               <span className="font-bold text-lg text-gradient">Codrithm</span>
             </motion.div>
           </Link>

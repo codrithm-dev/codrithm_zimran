@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Eye, EyeOff, Code2, ArrowRight } from "lucide-react";
+import { Eye, EyeOff, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -72,9 +72,7 @@ export default function Login() {
         <div className="flex flex-col items-center mb-6">
           <Link href="/">
             <div className="flex items-center gap-2 mb-4 cursor-pointer">
-              <div className="w-9 h-9 rounded-xl bg-primary/20 border border-primary/30 flex items-center justify-center">
-                <Code2 className="w-5 h-5 text-primary" />
-              </div>
+              <img src="/codrithm-logo.svg" alt="Codrithm" className="w-9 h-9 object-contain" />
               <span className="font-bold text-xl text-gradient">Codrithm</span>
             </div>
           </Link>
