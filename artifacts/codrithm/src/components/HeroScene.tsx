@@ -62,18 +62,18 @@ function GeometricShape({ x, y, delay, color }: {
 export function HeroScene() {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <FloatingOrb x="10%" y="15%" size={300} color="#8b5cf6" delay={0} />
-      <FloatingOrb x="70%" y="60%" size={250} color="#06b6d4" delay={1.5} />
-      <FloatingOrb x="50%" y="10%" size={200} color="#6366f1" delay={0.8} />
-      <FloatingOrb x="85%" y="20%" size={180} color="#a78bfa" delay={2} />
-      <FloatingOrb x="20%" y="70%" size={220} color="#0891b2" delay={1} />
+      <FloatingOrb x="10%" y="15%" size={300} color="#1a6fd4" delay={0} />
+      <FloatingOrb x="70%" y="60%" size={250} color="#6ee7b0" delay={1.5} />
+      <FloatingOrb x="50%" y="10%" size={200} color="#1a6fd4" delay={0.8} />
+      <FloatingOrb x="85%" y="20%" size={180} color="#4d9fe0" delay={2} />
+      <FloatingOrb x="20%" y="70%" size={220} color="#4dd4a0" delay={1} />
 
-      <GeometricShape x="15%" y="25%" delay={0} color="#8b5cf6" />
-      <GeometricShape x="75%" y="15%" delay={1} color="#06b6d4" />
-      <GeometricShape x="60%" y="70%" delay={0.5} color="#6366f1" />
-      <GeometricShape x="5%" y="60%" delay={2} color="#a78bfa" />
-      <GeometricShape x="85%" y="55%" delay={1.5} color="#8b5cf6" />
-      <GeometricShape x="40%" y="80%" delay={0.8} color="#06b6d4" />
+      <GeometricShape x="15%" y="25%" delay={0} color="#1a6fd4" />
+      <GeometricShape x="75%" y="15%" delay={1} color="#6ee7b0" />
+      <GeometricShape x="60%" y="70%" delay={0.5} color="#1a6fd4" />
+      <GeometricShape x="5%" y="60%" delay={2} color="#4d9fe0" />
+      <GeometricShape x="85%" y="55%" delay={1.5} color="#1a6fd4" />
+      <GeometricShape x="40%" y="80%" delay={0.8} color="#6ee7b0" />
 
       {[...Array(20)].map((_, i) => (
         <motion.div
