@@ -34,7 +34,7 @@ export default function CategoryDetail() {
   }
 
   const IconComponent =
-    ((LucideIcons as Record<string, React.ComponentType<{ className?: string }>>) [category.icon]) ||
+    ((LucideIcons as unknown as Record<string, React.ComponentType<{ className?: string }>>) [category.icon]) ||
     LucideIcons.Code2;
 
   return (

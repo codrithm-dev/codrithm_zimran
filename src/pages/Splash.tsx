@@ -29,6 +29,7 @@ export default function Splash() {
       }, 300);
       return () => clearTimeout(t);
     }
+    return undefined;
   }, [progress, setLocation]);
 
   return (
