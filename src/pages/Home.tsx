@@ -11,6 +11,9 @@ import { StatCard } from "@/components/StatCard";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { HeroScene } from "@/components/HeroScene";
 import { PageTransition } from "@/components/PageTransition";
+import { ParallaxSection } from "@/components/ParallaxSection";
+import { ParallaxBackground } from "@/components/ParallaxBackground";
+import { MagneticButton } from "@/components/MagneticButton";
 import { CATEGORIES } from "@/data/categories";
 import { EVENTS } from "@/data/events";
 
@@ -74,16 +77,20 @@ export default function Home() {
                 transition={{ delay: 0.5 }}
                 className="flex flex-wrap gap-3"
               >
-                <Link href="/join">
-                  <Button size="lg" className="glow-primary text-base px-6" data-testid="button-join-hero">
-                    Join Free <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
-                <Link href="/categories">
-                  <Button size="lg" variant="outline" className="text-base px-6" data-testid="button-explore-hero">
-                    Explore Categories
-                  </Button>
-                </Link>
+                <MagneticButton pullDistance={10}>
+                  <Link href="/join">
+                    <Button size="lg" className="glow-primary text-base px-6 cursor-pointer" data-testid="button-join-hero">
+                      Join Free <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
+                </MagneticButton>
+                <MagneticButton pullDistance={10}>
+                  <Link href="/categories">
+                    <Button size="lg" variant="outline" className="text-base px-6 cursor-pointer" data-testid="button-explore-hero">
+                      Explore Categories
+                    </Button>
+                  </Link>
+                </MagneticButton>
               </motion.div>
 
               <motion.div
@@ -105,19 +112,23 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-20 bg-muted/20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <StatCard icon={<Users className="w-5 h-5" />} label="Active Members" value={3250} suffix="+" delay={0} />
-              <StatCard icon={<BookOpen className="w-5 h-5" />} label="Categories" value={10} delay={0.1} color="text-secondary" />
-              <StatCard icon={<Calendar className="w-5 h-5" />} label="Events Hosted" value={142} suffix="+" delay={0.2} color="text-chart-3" />
-              <StatCard icon={<TrendingUp className="w-5 h-5" />} label="Projects Built" value={890} suffix="+" delay={0.3} color="text-chart-4" />
-            </div>
+        <section className="py-20 bg-muted/20 relative overflow-hidden">
+          <ParallaxBackground count={3} showParticles={true} />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <ParallaxSection speed={0.2}>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <StatCard icon={<Users className="w-5 h-5" />} label="Active Members" value={3250} suffix="+" delay={0} />
+                <StatCard icon={<BookOpen className="w-5 h-5" />} label="Categories" value={10} delay={0.1} color="text-secondary" />
+                <StatCard icon={<Calendar className="w-5 h-5" />} label="Events Hosted" value={142} suffix="+" delay={0.2} color="text-chart-3" />
+                <StatCard icon={<TrendingUp className="w-5 h-5" />} label="Projects Built" value={890} suffix="+" delay={0.3} color="text-chart-4" />
+              </div>
+            </ParallaxSection>
           </div>
         </section>
 
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-20 relative overflow-hidden">
+          <ParallaxBackground count={2} showParticles={false} />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <ScrollReveal className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-3">Explore Tech Categories</h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
@@ -132,82 +143,96 @@ export default function Home() {
             </div>
 
             <div className="text-center">
-              <Link href="/categories">
-                <Button variant="outline" data-testid="button-view-all-categories">
-                  View All Categories <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
+              <MagneticButton pullDistance={10}>
+                <Link href="/categories">
+                  <Button variant="outline" data-testid="button-view-all-categories">
+                    View All Categories <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+              </MagneticButton>
             </div>
           </div>
         </section>
 
-        <section className="py-20 bg-muted/20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-20 bg-muted/20 relative overflow-hidden">
+          <ParallaxBackground count={3} showParticles={true} />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-start">
-              <div>
-                <ScrollReveal>
-                  <h2 className="text-3xl font-bold mb-3">Upcoming Events</h2>
-                  <p className="text-muted-foreground mb-8">Workshops, hackathons, and sprints — always something happening.</p>
-                </ScrollReveal>
-                <div className="flex flex-col gap-3">
-                  {EVENTS.map((event, i) => (
-                    <EventCard key={event.id} event={event} delay={i * 0.1} />
-                  ))}
+              <ParallaxSection speed={0.15}>
+                <div>
+                  <ScrollReveal>
+                    <h2 className="text-3xl font-bold mb-3">Upcoming Events</h2>
+                    <p className="text-muted-foreground mb-8">Workshops, hackathons, and sprints — always something happening.</p>
+                  </ScrollReveal>
+                  <div className="flex flex-col gap-3">
+                    {EVENTS.map((event, i) => (
+                      <EventCard key={event.id} event={event} delay={i * 0.1} />
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </ParallaxSection>
 
-              <div>
-                <ScrollReveal delay={0.2}>
-                  <h2 className="text-3xl font-bold mb-3">What Members Say</h2>
-                  <p className="text-muted-foreground mb-8">Real stories from students who found their path here.</p>
-                </ScrollReveal>
-                <div className="flex flex-col gap-4">
-                  {TESTIMONIALS.map((t, i) => (
-                    <ScrollReveal key={i} delay={0.1 * i} direction="right">
-                      <div className="bg-card border border-card-border rounded-xl p-5">
-                        <div className="flex mb-3 gap-0.5">
-                          {[...Array(5)].map((_, j) => (
-                            <Star key={j} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                          ))}
+              <ParallaxSection speed={-0.1}>
+                <div>
+                  <ScrollReveal delay={0.2}>
+                    <h2 className="text-3xl font-bold mb-3">What Members Say</h2>
+                    <p className="text-muted-foreground mb-8">Real stories from students who found their path here.</p>
+                  </ScrollReveal>
+                  <div className="flex flex-col gap-4">
+                    {TESTIMONIALS.map((t, i) => (
+                      <ScrollReveal key={i} delay={0.1 * i} direction="right">
+                        <div className="bg-card border border-card-border rounded-xl p-5">
+                          <div className="flex mb-3 gap-0.5">
+                            {[...Array(5)].map((_, j) => (
+                              <Star key={j} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                            ))}
+                          </div>
+                          <p className="text-sm text-muted-foreground italic mb-3">"{t.text}"</p>
+                          <div>
+                            <div className="font-semibold text-sm">{t.name}</div>
+                            <div className="text-xs text-muted-foreground">{t.role}</div>
+                          </div>
                         </div>
-                        <p className="text-sm text-muted-foreground italic mb-3">"{t.text}"</p>
-                        <div>
-                          <div className="font-semibold text-sm">{t.name}</div>
-                          <div className="text-xs text-muted-foreground">{t.role}</div>
-                        </div>
-                      </div>
-                    </ScrollReveal>
-                  ))}
+                      </ScrollReveal>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </ParallaxSection>
             </div>
           </div>
         </section>
 
-        <section className="py-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <ScrollReveal>
-              <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 rounded-2xl p-12">
-                <h2 className="text-4xl font-black mb-4">
-                  Ready to <span className="text-gradient">level up?</span>
-                </h2>
-                <p className="text-muted-foreground mb-8 text-lg">
-                  Join thousands of student developers already building their future on Codrithm.
-                </p>
-                <div className="flex flex-wrap gap-3 justify-center">
-                  <Link href="/join">
-                    <Button size="lg" className="glow-primary text-base px-8" data-testid="button-join-cta">
-                      Get Started Free <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </Link>
-                  <Link href="/login">
-                    <Button size="lg" variant="outline" className="text-base px-8" data-testid="button-signin-cta">
-                      Sign In
-                    </Button>
-                  </Link>
+        <section className="py-20 relative overflow-hidden">
+          <ParallaxBackground count={2} showParticles={false} />
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <ParallaxSection speed={0.2}>
+              <ScrollReveal>
+                <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 rounded-2xl p-12">
+                  <h2 className="text-4xl font-black mb-4">
+                    Ready to <span className="text-gradient">level up?</span>
+                  </h2>
+                  <p className="text-muted-foreground mb-8 text-lg">
+                    Join thousands of student developers already building their future on Codrithm.
+                  </p>
+                  <div className="flex flex-wrap gap-3 justify-center">
+                    <MagneticButton pullDistance={12}>
+                      <Link href="/join">
+                        <Button size="lg" className="glow-primary text-base px-8 cursor-pointer" data-testid="button-join-cta">
+                          Get Started Free <ArrowRight className="w-4 h-4 ml-2" />
+                        </Button>
+                      </Link>
+                    </MagneticButton>
+                    <MagneticButton pullDistance={12}>
+                      <Link href="/login">
+                        <Button size="lg" variant="outline" className="text-base px-8 cursor-pointer" data-testid="button-signin-cta">
+                          Sign In
+                        </Button>
+                      </Link>
+                    </MagneticButton>
+                  </div>
                 </div>
-              </div>
-            </ScrollReveal>
+              </ScrollReveal>
+            </ParallaxSection>
           </div>
         </section>
 

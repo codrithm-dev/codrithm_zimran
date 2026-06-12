@@ -8,6 +8,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { PageTransition } from "@/components/PageTransition";
+import { ParallaxBackground } from "@/components/ParallaxBackground";
+import { ParallaxSection } from "@/components/ParallaxSection";
 import { CATEGORIES } from "@/data/categories";
 
 const DIFFICULTY_COLORS: Record<string, string> = {
@@ -45,6 +47,7 @@ export default function CategoryDetail() {
         <div className="relative pt-24 pb-16 overflow-hidden">
           <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at 50% 0%, ${category.color}15 0%, transparent 70%)` }} />
           <div className="absolute inset-0 grid-bg opacity-20" />
+          <ParallaxBackground count={2} showParticles={true} />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div
@@ -113,6 +116,7 @@ export default function CategoryDetail() {
         <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
+              <ParallaxSection speed={0.15}>
               <ScrollReveal>
                 <div className="bg-card border border-card-border rounded-xl p-6">
                   <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
@@ -138,12 +142,15 @@ export default function CategoryDetail() {
                 </div>
               </ScrollReveal>
 
-              <ScrollReveal delay={0.1}>
-                <div className="bg-card border border-card-border rounded-xl p-6">
-                  <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                    <Code2 className="w-5 h-5 text-secondary" />
-                    Sample Projects
-                  </h2>
+              </ParallaxSection>
+
+              <ParallaxSection speed={0.1}>
+                <ScrollReveal delay={0.1}>
+                  <div className="bg-card border border-card-border rounded-xl p-6">
+                    <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                      <Code2 className="w-5 h-5 text-secondary" />
+                      Sample Projects
+                    </h2>
                   <div className="grid sm:grid-cols-2 gap-3">
                     {category.projects.map((proj, i) => (
                       <motion.div
@@ -171,9 +178,11 @@ export default function CategoryDetail() {
                   </div>
                 </div>
               </ScrollReveal>
+              </ParallaxSection>
             </div>
 
             <div className="space-y-6">
+              <ParallaxSection speed={-0.1}>
               <ScrollReveal delay={0.2}>
                 <div className="bg-card border border-card-border rounded-xl p-6">
                   <h3 className="font-semibold mb-4">Community Stats</h3>
@@ -189,7 +198,9 @@ export default function CategoryDetail() {
                   ))}
                 </div>
               </ScrollReveal>
+              </ParallaxSection>
 
+              <ParallaxSection speed={-0.15}>
               <ScrollReveal delay={0.3}>
                 <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 rounded-xl p-6 text-center">
                   <h3 className="font-semibold mb-2">Ready to join?</h3>
@@ -203,6 +214,7 @@ export default function CategoryDetail() {
                   </Link>
                 </div>
               </ScrollReveal>
+              </ParallaxSection>
             </div>
           </div>
         </main>

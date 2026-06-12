@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Moon, Sun, Menu, X, Code2 } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
+import { MagneticButton } from "@/components/MagneticButton";
 
 const navLinks = [
   { href: "/home", label: "Home" },
@@ -38,47 +39,52 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/home">
-            <motion.div
-              className="flex items-center gap-2 cursor-pointer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              data-testid="logo-link"
-            >
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <Code2 className="w-4 h-4 text-primary-foreground" />
-              </div>
-              <span className="font-bold text-lg text-gradient">Codrithm</span>
-            </motion.div>
-          </Link>
+          <MagneticButton pullDistance={8}>
+            <Link href="/home">
+              <motion.div
+                className="flex items-center gap-2 cursor-pointer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                data-testid="logo-link"
+              >
+                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+                  <Code2 className="w-4 h-4 text-primary-foreground" />
+                </div>
+                <span className="font-bold text-lg text-gradient">Codrithm</span>
+              </motion.div>
+            </Link>
+          </MagneticButton>
 
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <motion.span
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.97 }}
-                  data-testid={`nav-link-${link.label.toLowerCase()}`}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
-                    location === link.href
-                      ? "bg-primary/15 text-primary"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                  }`}
-                >
-                  {link.label}
-                </motion.span>
-              </Link>
+              <MagneticButton key={link.href} pullDistance={6}>
+                <Link href={link.href}>
+                  <motion.span
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                    data-testid={`nav-link-${link.label.toLowerCase()}`}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
+                      location === link.href
+                        ? "bg-primary/15 text-primary"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    }`}
+                  >
+                    {link.label}
+                  </motion.span>
+                </Link>
+              </MagneticButton>
             ))}
           </div>
 
           <div className="flex items-center gap-2">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={toggleTheme}
-              data-testid="button-theme-toggle"
-              className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-            >
+            <MagneticButton pullDistance={6}>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={toggleTheme}
+                data-testid="button-theme-toggle"
+                className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+              >
               <AnimatePresence mode="wait">
                 {theme === "dark" ? (
                   <motion.div
@@ -103,6 +109,7 @@ export function Navbar() {
                 )}
               </AnimatePresence>
             </motion.button>
+            </MagneticButton>
 
             <Link href="/login">
               <Button

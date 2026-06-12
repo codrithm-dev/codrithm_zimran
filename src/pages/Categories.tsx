@@ -6,6 +6,8 @@ import { Footer } from "@/components/Footer";
 import { CategoryCard } from "@/components/CategoryCard";
 import { PageTransition } from "@/components/PageTransition";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { ParallaxBackground } from "@/components/ParallaxBackground";
+import { ParallaxSection } from "@/components/ParallaxSection";
 import { CATEGORIES } from "@/data/categories";
 
 const FILTERS = ["All", "Beginner", "Intermediate", "Advanced"];
@@ -29,7 +31,7 @@ export default function Categories() {
 
         <div className="relative pt-24 pb-12 overflow-hidden">
           <div className="absolute inset-0 grid-bg opacity-20" />
-          <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-primary/5 blur-3xl" />
+          <ParallaxBackground count={3} showParticles={true} />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <ScrollReveal className="text-center mb-8">
               <h1 className="text-4xl sm:text-5xl font-black mb-3">
@@ -77,9 +79,11 @@ export default function Categories() {
 
         <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
           <div className="flex items-center justify-between mb-4">
-            <p className="text-sm text-muted-foreground">
-              Showing <span className="text-foreground font-medium">{filtered.length}</span> categories
-            </p>
+            <ParallaxSection speed={-0.1}>
+              <p className="text-sm text-muted-foreground">
+                Showing <span className="text-foreground font-medium">{filtered.length}</span> categories
+              </p>
+            </ParallaxSection>
           </div>
 
           <AnimatePresence mode="wait">

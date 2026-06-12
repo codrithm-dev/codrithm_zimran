@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
+import { CustomCursor } from "@/components/CustomCursor";
 
 import Splash from "@/pages/Splash";
 import Login from "@/pages/Login";
@@ -62,6 +63,7 @@ function App() {
             <Router />
           </WouterRouter>
           <Toaster />
+          <CustomCursor />
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>

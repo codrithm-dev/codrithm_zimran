@@ -11,6 +11,8 @@ import { Footer } from "@/components/Footer";
 import { PageTransition } from "@/components/PageTransition";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { ParallaxBackground } from "@/components/ParallaxBackground";
+import { ParallaxSection } from "@/components/ParallaxSection";
 import { CURRENT_USER } from "@/data/users";
 
 export default function Profile() {
@@ -26,7 +28,7 @@ export default function Profile() {
 
         <div className="relative pt-24 pb-12 overflow-hidden">
           <div className="absolute inset-0 grid-bg opacity-20" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 rounded-full bg-primary/5 blur-3xl" />
+          <ParallaxBackground count={3} showParticles={true} />
 
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div
@@ -89,6 +91,7 @@ export default function Profile() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
+              <ParallaxSection speed={0.15}>
               <ScrollReveal>
                 <div className="bg-card border border-card-border rounded-xl p-6">
                   <h2 className="font-semibold mb-4">Badges & Achievements</h2>
@@ -105,7 +108,9 @@ export default function Profile() {
                   </div>
                 </div>
               </ScrollReveal>
+              </ParallaxSection>
 
+              <ParallaxSection speed={-0.1}>
               <ScrollReveal delay={0.1}>
                 <div className="bg-card border border-card-border rounded-xl p-6">
                   <h2 className="font-semibold mb-4">Recent Activity</h2>
@@ -128,39 +133,42 @@ export default function Profile() {
                   </div>
                 </div>
               </ScrollReveal>
+              </ParallaxSection>
 
-              <ScrollReveal delay={0.2} className="md:col-span-2">
-                <div className="bg-card border border-card-border rounded-xl p-6">
-                  <h2 className="font-semibold mb-1 flex items-center gap-2">
-                    <Settings className="w-4 h-4 text-primary" /> Settings
-                  </h2>
-                  <p className="text-sm text-muted-foreground mb-5">Manage your account preferences</p>
-                  <div className="flex flex-col gap-4">
-                    {[
-                      { icon: Bell, label: "Push Notifications", desc: "Get notified about events and messages", value: notifications, setter: setNotifications, id: "toggle-notifications" },
-                      { icon: Mail, label: "Email Updates", desc: "Weekly digest and announcements", value: emailUpdates, setter: setEmailUpdates, id: "toggle-email" },
-                      { icon: Moon, label: "Public Profile", desc: "Allow others to find your profile", value: publicProfile, setter: setPublicProfile, id: "toggle-public" },
-                    ].map((s) => (
-                      <div key={s.id} className="flex items-center justify-between py-3 border-b border-border last:border-0">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                            <s.icon className="w-4 h-4 text-primary" />
+              <ParallaxSection speed={0.2} className="md:col-span-2">
+                <ScrollReveal delay={0.2}>
+                  <div className="bg-card border border-card-border rounded-xl p-6">
+                    <h2 className="font-semibold mb-1 flex items-center gap-2">
+                      <Settings className="w-4 h-4 text-primary" /> Settings
+                    </h2>
+                    <p className="text-sm text-muted-foreground mb-5">Manage your account preferences</p>
+                    <div className="flex flex-col gap-4">
+                      {[
+                        { icon: Bell, label: "Push Notifications", desc: "Get notified about events and messages", value: notifications, setter: setNotifications, id: "toggle-notifications" },
+                        { icon: Mail, label: "Email Updates", desc: "Weekly digest and announcements", value: emailUpdates, setter: setEmailUpdates, id: "toggle-email" },
+                        { icon: Moon, label: "Public Profile", desc: "Allow others to find your profile", value: publicProfile, setter: setPublicProfile, id: "toggle-public" },
+                      ].map((s) => (
+                        <div key={s.id} className="flex items-center justify-between py-3 border-b border-border last:border-0">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                              <s.icon className="w-4 h-4 text-primary" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium">{s.label}</p>
+                              <p className="text-xs text-muted-foreground">{s.desc}</p>
+                            </div>
                           </div>
-                          <div>
-                            <p className="text-sm font-medium">{s.label}</p>
-                            <p className="text-xs text-muted-foreground">{s.desc}</p>
-                          </div>
+                          <Switch
+                            checked={s.value}
+                            onCheckedChange={s.setter}
+                            data-testid={s.id}
+                          />
                         </div>
-                        <Switch
-                          checked={s.value}
-                          onCheckedChange={s.setter}
-                          data-testid={s.id}
-                        />
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </ScrollReveal>
+                </ScrollReveal>
+              </ParallaxSection>
             </div>
           </div>
         </div>
