@@ -1,81 +1,88 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { PageTransition } from "@/components/PageTransition";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { ParallaxBackground } from "@/components/ParallaxBackground";
-import { MemberCard } from "@/components/MemberCard";
-import { TEAM_MEMBERS, TEAM_DEPARTMENTS } from "@/data/team";
+import { PageTransition } from "@/components/PageTransition";
+import { TEAM } from "@/data/team";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Twitter } from "lucide-react";
 
 export default function Team() {
-  const [activeDepartment, setActiveDepartment] = useState("All");
-
-  const filtered = TEAM_MEMBERS.filter(
-    (member) => activeDepartment === "All" || member.department === activeDepartment
-  );
-
   return (
     <PageTransition>
       <div className="min-h-screen flex flex-col">
         <Navbar />
 
-        <section className="relative pt-24 pb-12 overflow-hidden">
-          <div className="absolute inset-0 grid-bg opacity-20" />
-          <ParallaxBackground count={3} showParticles={true} />
+        <section className="pt-32 pb-20 relative overflow-hidden">
+          <div className="absolute inset-0 grid-bg opacity-10" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <ScrollReveal className="text-center mb-8">
-              <h1 className="text-4xl sm:text-5xl font-black mb-3">
+            <ScrollReveal>
+              <h1 className="text-4xl sm:text-5xl font-black mb-4">
                 Meet the <span className="text-gradient">Team</span>
               </h1>
-              <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-                The passionate people behind Codrithm — builders, mentors, and community leaders.
+              <p className="text-lg text-muted-foreground max-w-2xl">
+                The engineers, designers, and dreamers behind Codrithm.
               </p>
             </ScrollReveal>
+          </div>
+        </section>
 
-            <div className="flex justify-center gap-2 flex-wrap">
-              {TEAM_DEPARTMENTS.map((dept) => (
-                <motion.button
-                  key={dept}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setActiveDepartment(dept)}
-                  className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                    activeDepartment === dept
-                      ? "bg-primary text-primary-foreground glow-primary"
-                      : "bg-card border border-card-border text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {dept}
-                </motion.button>
+        <section className="py-12 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {TEAM.map((member, i) => (
+                <ScrollReveal key={member.id} delay={i * 0.08}>
+                  <motion.div
+                    whileHover={{ y: -4 }}
+                    className="bg-card border border-card-border rounded-xl p-8 text-center"
+                  >
+                    <img
+                      src={member.avatar}
+                      alt={member.name}
+                      className="w-24 h-24 rounded-full mx-auto mb-4 bg-muted"
+                    />
+                    <h3 className="font-semibold text-lg">{member.name}</h3>
+                    <div className="text-sm text-primary font-medium mb-3">{member.role}</div>
+                    <p className="text-sm text-muted-foreground mb-4">{member.bio}</p>
+                    {member.social && (
+                      <div className="flex items-center justify-center gap-2">
+                        {member.social.github && (
+                          <a
+                            href={member.social.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 rounded-lg bg-muted/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                          >
+                            <Github className="w-4 h-4" />
+                          </a>
+                        )}
+                        {member.social.linkedin && (
+                          <a
+                            href={member.social.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 rounded-lg bg-muted/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                          >
+                            <Linkedin className="w-4 h-4" />
+                          </a>
+                        )}
+                        {member.social.twitter && (
+                          <a
+                            href={member.social.twitter}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 rounded-lg bg-muted/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                          >
+                            <Twitter className="w-4 h-4" />
+                          </a>
+                        )}
+                      </div>
+                    )}
+                  </motion.div>
+                </ScrollReveal>
               ))}
             </div>
           </div>
         </section>
-
-        <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 w-full">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeDepartment}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
-              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {filtered.map((member, i) => (
-                <MemberCard key={member.id} member={member} delay={i * 0.08} />
-              ))}
-            </motion.div>
-          </AnimatePresence>
-
-          {filtered.length === 0 && (
-            <div className="text-center py-20 text-muted-foreground">
-              <p className="text-lg font-medium">No team members found</p>
-              <p className="text-sm mt-1">Try a different department</p>
-            </div>
-          )}
-        </main>
 
         <Footer />
       </div>

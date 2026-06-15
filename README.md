@@ -1,279 +1,147 @@
-#  Codrithm 
+# Codrithm
 
-<div align="center">
+A student tech community platform where developers discover tech specializations, build real projects, and find their community. Features 10 learning categories, events, multi-step onboarding, user profiles, and a full admin dashboard.
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&size=30&pause=1000&color=00C2FF&center=true&vCenter=true&width=850&lines=Building+Modern+Digital+Experiences;Open+Source+%7C+Scalable+%7C+Creative;Empowering+Developers+Worldwide+🚀;Innovation+Starts+Here" />
+## Tech Stack
 
-<br/>
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0ea5e9,100:2563eb&height=220&section=header&text=Codrithm&fontSize=55&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Modern%20Developer%20Platform&descAlignY=58&descAlign=50" width="100%"/>
-
-<br/>
-
-![Status](https://img.shields.io/badge/STATUS-ACTIVE-success?style=for-the-badge&logo=github)
-![Open Source](https://img.shields.io/badge/OPEN_SOURCE-YES-blue?style=for-the-badge&logo=opensourceinitiative)
-![Contributions](https://img.shields.io/badge/CONTRIBUTIONS-WELCOME-orange?style=for-the-badge&logo=git)
-![Made With Love](https://img.shields.io/badge/MADE_WITH-❤-red?style=for-the-badge)
-
-<br/>
-
-### ⚡ Building Future-Ready Digital Products For Developers & Innovators
-
-</div>
-
----
-
-# 🌟 About Codrithm
-
-> **Codrithm Zimran** is a modern developer-focused ecosystem crafted to deliver scalable applications, impactful digital experiences, and innovation-driven solutions.
-
-We focus on blending:
-
-- 🚀 High-performance engineering
-- 🎨 Modern UI/UX systems
-- 🌍 Community-driven collaboration
-- ⚡ Scalable architectures
-- 🤖 AI-powered innovation
-- 🔥 Open-source growth
-
----
-
-# ✨ Core Features
-
-<div align="center">
-
-| 🚀 Feature | 💡 Description |
+| Layer | Technology |
 |---|---|
-| ⚡ Performance Optimized | Fast, scalable & efficient architecture |
-| 🎨 Modern UI/UX | Minimal, interactive & clean interfaces |
-| 📱 Fully Responsive | Optimized across all screen sizes |
-| 🔒 Security Focused | Secure-first engineering approach |
-| 🌍 Community Driven | Built for developers & creators |
-| 🤖 AI Ready | Designed for future AI integrations |
-| 🚀 Scalable Infrastructure | Enterprise-ready architecture |
+| Framework | React 19 + TypeScript |
+| Build Tool | Vite 7 |
+| Styling | Tailwind CSS v4 |
+| Components | shadcn/ui (New York style) |
+| Animations | Framer Motion |
+| Routing | Wouter |
+| State | React Query |
+| Forms | React Hook Form + Zod |
+| Charts | Recharts |
+| Icons | Lucide React |
 
-</div>
-
----
-
-# 🛠️ Tech Ecosystem
-
-<div align="center">
-
-## 💻 Frontend Stack
-
-| Technology | Purpose |
-|---|---|
-| ⚛️ React.js | Frontend Framework |
-| 🎨 Tailwind CSS | Modern Styling |
-| 🟨 JavaScript | Interactivity |
-| 🌐 HTML5 | Structure |
-| 🎯 CSS3 | UI Design |
-
----
-
-## ⚙️ Backend Stack
-
-| Technology | Purpose |
-|---|---|
-| 🟢 Node.js | Backend Runtime |
-| 🚂 Express.js | REST APIs |
-| 🐍 Python | AI & Automation |
-| ⚡ FastAPI | High-Speed APIs |
-
----
-
-## ☁️ Database & Cloud
-
-| Technology | Purpose |
-|---|---|
-| 🍃 MongoDB | NoSQL Database |
-| 🐘 PostgreSQL | Relational Database |
-| ☁️ AWS | Cloud Infrastructure |
-| 🐙 GitHub | Version Control |
-
-</div>
-
----
-
-# 📂 Project Architecture
+## Getting Started
 
 ```bash
-codrithm_zimran/
-│
-├── 📁 frontend/        # Frontend Application
-├── 📁 backend/         # APIs & Backend Services
-├── 📁 assets/          # Static Assets & Media
-├── 📁 docs/            # Documentation Files
-├── 📄 .env.example     # Environment Variables
-└── 📄 README.md
-
-
-
----
-
-# ⚙️ Installation Guide
-
-## 📥 Clone Repository
-
-```bash
-git clone https://github.com/codrithm-dev/codrithm_zimran.git
-```
-
----
-
-## 📂 Navigate Into Folder
-
-```bash
-cd codrithm_zimran
-```
-
----
-
-## 📦 Install Dependencies
-
-```bash
+git clone https://github.com/codrithm-dev/codrithm.git
+cd codrithm
 npm install
-```
-
----
-
-## 🚀 Start Development Server
-
-```bash
 npm run dev
 ```
 
----
+The dev server runs at `http://localhost:4173` by default.
 
-# 🚀 Deployment Platforms
+### Available Scripts
 
-<div align="center">
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run serve` | Preview production build |
+| `npm run typecheck` | Run TypeScript type checking |
 
-| Platform | Status |
-|:---:|:---:|
-| ▲ Vercel | ✅ Supported |
-| 🌐 Netlify | ✅ Supported |
-| 🚂 Railway | ✅ Supported |
-| 🎨 Render | ✅ Supported |
+## Features
 
-</div>
+### User-Facing
 
----
+- **Splash Screen** — Animated loading sequence with progress bar
+- **Home Page** — Hero section, stats, category grid, events, testimonials
+- **Authentication** — Login/signup with form validation (Zod schemas)
+- **Categories** — 10 tech tracks (Web Dev, AI/ML, Cybersecurity, etc.) with search and difficulty filters
+- **Category Detail** — Resources, projects, and member info per category
+- **Multi-Step Onboarding** — 3-step join flow (personal info, skills & interests, goals)
+- **Profile** — Stats, badges, activity feed, notification/settings toggles
+- **Events** — Workshops, hackathons, sprints, and bootcamps
 
-# 🌈 Why Codrithm?
+### Admin Panel
 
-### ✨ What Makes This Project Different?
+- **Dashboard** — Member growth chart, activity log, top members table
+- **Content Management** — Category and event management
+- **User Management** — View and manage community members
+- **Join Requests** — Approve/reject membership applications
+- **Analytics** — Charts and data visualizations
+- **Settings** — Platform configuration
 
-- 🔥 Modern Developer Experience
-- ⚡ Clean & Maintainable Code
-- 🎯 Scalable Folder Structure
-- 🌍 Community-Focused Vision
-- 🚀 Performance-Driven Workflow
-- 💡 Innovation-Centered Development
+### UI/UX
 
----
+- Dark/light theme support (persisted to localStorage)
+- Custom cursor component
+- Parallax backgrounds and scroll reveal animations
+- Magnetic button hover effects
+- Page transitions with AnimatePresence
+- 3D hero scene with floating orbs and geometric shapes
+- Responsive design across all screen sizes
 
-# 🤝 Contribution Workflow
+## Project Structure
 
-## 🚀 Want To Contribute?
-
-Follow these steps:
-
-### 1️⃣ Fork Repository
-
-Click the **Fork** button on GitHub.
-
----
-
-### 2️⃣ Create Branch
-
-```bash
-git checkout -b feature-name
+```
+src/
+├── components/          # Reusable UI components
+│   ├── ui/              # shadcn/ui primitives
+│   ├── AdminSidebar.tsx
+│   ├── AdminTopBar.tsx
+│   ├── CategoryCard.tsx
+│   ├── CustomCursor.tsx
+│   ├── EventCard.tsx
+│   ├── Footer.tsx
+│   ├── HeroScene.tsx
+│   ├── MagneticButton.tsx
+│   ├── Navbar.tsx
+│   ├── PageTransition.tsx
+│   ├── ParallaxBackground.tsx
+│   ├── ParallaxSection.tsx
+│   ├── ScrollReveal.tsx
+│   ├── StatCard.tsx
+│   └── theme-provider.tsx
+├── data/                # Static data (categories, events, users, requests)
+├── hooks/               # Custom hooks (use-toast, use-mobile)
+├── lib/                 # Utilities
+├── pages/               # Route components
+│   ├── admin/           # Admin panel pages
+│   ├── Splash.tsx
+│   ├── Login.tsx
+│   ├── Home.tsx
+│   ├── Categories.tsx
+│   ├── CategoryDetail.tsx
+│   ├── Join.tsx
+│   ├── Profile.tsx
+│   ├── Confirmation.tsx
+│   └── not-found.tsx
+├── App.tsx              # Root component with providers and router
+├── main.tsx             # Entry point
+└── index.css            # Global styles and theme variables
 ```
 
----
+## Routes
 
-### 3️⃣ Commit Changes
+| Path | Page |
+|---|---|
+| `/` | Splash screen |
+| `/login` | Login/Signup |
+| `/home` | Home page |
+| `/categories` | Category listing |
+| `/categories/:id` | Category detail |
+| `/join` | Multi-step onboarding |
+| `/profile` | User profile |
+| `/confirmation` | Post-signup confirmation |
+| `/admin/login` | Admin login |
+| `/admin/dashboard` | Admin dashboard |
+| `/admin/content` | Content management |
+| `/admin/users` | User management |
+| `/admin/requests` | Join requests |
+| `/admin/analytics` | Analytics |
+| `/admin/settings` | Admin settings |
 
-```bash
-git commit -m "Added awesome feature"
-```
+## Demo Credentials
 
----
+- **User:** `demo@codrithm.dev` / `password123`
+- **Admin:** `admin@codrithm.dev` / `admin123`
 
-### 4️⃣ Push Changes
+## Contributing
 
-```bash
-git push origin feature-name
-```
+1. Fork the repository
+2. Create a branch (`git checkout -b feature-name`)
+3. Commit your changes (`git commit -m "Add feature"`)
+4. Push to the branch (`git push origin feature-name`)
+5. Open a Pull Request
 
----
+## License
 
-### 5️⃣ Open Pull Request
-
-Submit your PR & contribute 🚀
-
----
-
-# 📊 Project Goals
-
-<div align="center">
-
-| Goal | Progress |
-|:---:|:---:|
-| Modern UI/UX | 🟢 In Progress |
-| API Scalability | 🟢 In Progress |
-| Open Source Expansion | 🟡 Growing |
-| AI Integrations | 🔥 Upcoming |
-| Community Building | 🚀 Active |
-
-</div>
-
----
-
-# 👨‍💻 Maintainers
-
-<div align="center">
-
-| Name | Role |
-|:---:|:---:|
-| Aliza Afzal | AI/ML Developer |
-| Codrithm Team | Development & Community |
-
-</div>
-
----
-
-# 🌍 Connect With Us
-
-<div align="center">
-
-| Platform | Link |
-|:---:|:---:|
-| 🌐 Website | https://codrithm.com |
-| 💻 GitHub | https://github.com/codrithm-dev |
-| 📢 Community | https://linktr.ee/codrithm |
-
-</div>
-
----
-
-# 💖 Support The Project
-
-If you like this project:
-
-- ⭐ Star the repository
-- 🍴 Fork the project
-- 🚀 Share with developers
-- 🤝 Contribute to open source
-
----
-
-<div align="center">
-
-# 🚀 “Code the logic. Craft the flow.”
-
-### Built with passion by Codrithm 💙
-
-</div>
+MIT

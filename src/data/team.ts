@@ -1,96 +1,63 @@
-export const TEAM_MEMBERS = [
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  avatar: string;
+  social?: {
+    github?: string;
+    linkedin?: string;
+    twitter?: string;
+  };
+}
+
+export const TEAM: TeamMember[] = [
   {
-    id: "t1",
-    name: "Arjun Mehta",
-    position: "Founder & CEO",
-    department: "Leadership",
-    bio: "Passionate about empowering the next generation of developers. Previously built EdTech platforms serving 50K+ students.",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Arjun",
-    linkedin: "https://linkedin.com/in/arjunmehta",
-    github: "https://github.com/arjunmehta",
+    id: "arif-khan",
+    name: "Arif Khan",
+    role: "Founder & CEO",
+    bio: "Full-stack engineer with 10+ years of experience building scalable platforms. Passionate about democratizing tech education.",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Arif",
+    social: { github: "#", linkedin: "#", twitter: "#" },
   },
   {
-    id: "t2",
-    name: "Sarah Chen",
-    position: "CTO",
-    department: "Leadership",
-    bio: "Full-stack engineer with a love for AI/ML. Led engineering teams at two YC-backed startups before joining Codrithm.",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
-    linkedin: "https://linkedin.com/in/sarahchen",
-    github: "https://github.com/sarahchen",
+    id: "sara-ahmed",
+    name: "Sara Ahmed",
+    role: "CTO",
+    bio: "Cloud architect and DevOps specialist. Previously led infrastructure at two Y Combinator startups.",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sara",
+    social: { github: "#", linkedin: "#" },
   },
   {
-    id: "t3",
-    name: "Marcus Thompson",
-    position: "Head of Engineering",
-    department: "Technical",
-    bio: "React and Node.js expert who has shipped products used by millions. Focused on building scalable, performant systems.",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Marcus",
-    linkedin: "https://linkedin.com/in/marcusthompson",
-    github: "https://github.com/marcusthompson",
+    id: "zain-hassan",
+    name: "Zain Hassan",
+    role: "Head of Product",
+    bio: "Product thinker with a design background. Obsessed with building tools that developers actually love to use.",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Zain",
+    social: { linkedin: "#", twitter: "#" },
   },
   {
-    id: "t4",
-    name: "Priya Kumar",
-    position: "Lead Frontend Engineer",
-    department: "Technical",
-    bio: "Design systems enthusiast and accessibility advocate. Creates beautiful, inclusive user interfaces.",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Priya",
-    linkedin: "https://linkedin.com/in/priyakumar",
-    github: "https://github.com/priyakumar",
+    id: "mina-ali",
+    name: "Mina Ali",
+    role: "Lead Engineer",
+    bio: "Systems engineer specializing in high-performance applications and distributed systems.",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mina",
+    social: { github: "#", linkedin: "#" },
   },
   {
-    id: "t5",
-    name: "Zara Lee",
-    position: "Lead Backend Engineer",
-    department: "Technical",
-    bio: "Distributed systems engineer specializing in APIs, databases, and cloud infrastructure. Open source contributor.",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Zara",
-    linkedin: "https://linkedin.com/in/zaralee",
-    github: "https://github.com/zaralee",
+    id: "omar-farooq",
+    name: "Omar Farooq",
+    role: "AI/ML Lead",
+    bio: "Machine learning researcher turned engineer. Building the AI features that power Codrithm's platform.",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Omar",
+    social: { github: "#", linkedin: "#" },
   },
   {
-    id: "t6",
-    name: "Jordan Park",
-    position: "Community Manager",
-    department: "Community",
-    bio: "Connects developers with opportunities. Organized 50+ hackathons and workshops across 10 universities.",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jordan",
-    linkedin: "https://linkedin.com/in/jordanpark",
-    github: "https://github.com/jordanpark",
-  },
-  {
-    id: "t7",
-    name: "Aisha Rahman",
-    position: "Events Coordinator",
-    department: "Community",
-    bio: "Event strategist who brings tech communities together. Passionate about inclusive and educational programming.",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Aisha",
-    linkedin: "https://linkedin.com/in/aisharahman",
-    github: "https://github.com/aisharahman",
-  },
-  {
-    id: "t8",
-    name: "Dr. Kevin Wu",
-    position: "Technical Advisor",
-    department: "Advisors",
-    bio: "Professor of Computer Science at MIT. Researcher in AI ethics and machine learning fairness.",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Kevin",
-    linkedin: "https://linkedin.com/in/drkevinwu",
-    github: "https://github.com/drkevinwu",
-  },
-  {
-    id: "t9",
-    name: "Lisa Fernandez",
-    position: "Industry Advisor",
-    department: "Advisors",
-    bio: "VP of Engineering at a Fortune 500 tech company. Mentoring the next generation of diverse engineering leaders.",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Lisa",
-    linkedin: "https://linkedin.com/in/lisafernandez",
-    github: "https://github.com/lisafernandez",
+    id: "hira-rizvi",
+    name: "Hira Rizvi",
+    role: "Design Lead",
+    bio: "UX designer focused on accessibility and delightful experiences. Former design lead at a Series B startup.",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Hira",
+    social: { linkedin: "#", twitter: "#" },
   },
 ];
-
-export type TeamMember = typeof TEAM_MEMBERS[0];
-
-export const TEAM_DEPARTMENTS = ["All", "Leadership", "Technical", "Community", "Advisors"];

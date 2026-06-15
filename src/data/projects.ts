@@ -1,72 +1,62 @@
-export const PROJECTS = [
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  techStack: string[];
+  category: string;
+  image?: string;
+  url?: string;
+  github?: string;
+}
+
+export const PROJECTS: Project[] = [
   {
-    id: "p1",
-    name: "Codrithm Learning Platform",
-    description: "A full-stack learning management system built with React and Node.js, featuring real-time collaboration, progress tracking, and AI-powered recommendations.",
-    technologies: ["React", "Node.js", "PostgreSQL", "Redis", "Docker"],
-    status: "Active",
-    category: "Enterprise",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop",
-    featured: true,
-    github: "https://github.com/codrithm/learning-platform",
+    id: "open-contrib",
+    title: "OpenContrib",
+    description: "An open-source contribution tracker that helps students discover beginner-friendly issues across GitHub repositories.",
+    techStack: ["React", "Node.js", "PostgreSQL", "GitHub API"],
+    category: "Developer Tools",
+    github: "#",
   },
   {
-    id: "p2",
-    name: "AI Study Buddy",
-    description: "An AI-powered chatbot that helps students with coding questions, concept explanations, and study plan generation using GPT-4 and RAG.",
-    technologies: ["Python", "FastAPI", "LangChain", "OpenAI", "ChromaDB"],
-    status: "Active",
-    category: "Enterprise",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
-    featured: true,
-    github: "https://github.com/codrithm/ai-study-buddy",
-  },
-  {
-    id: "p3",
-    name: "Community Hackathon Portal",
-    description: "A platform for organizing and managing hackathons, with team matching, project submission, and real-time leaderboards.",
-    technologies: ["Next.js", "Prisma", "Tailwind CSS", "Vercel"],
-    status: "Completed",
+    id: "campus-connect",
+    title: "Campus Connect",
+    description: "A real-time campus event and study group coordination platform built by and for university students.",
+    techStack: ["Next.js", "Socket.io", "MongoDB", "Tailwind CSS"],
     category: "Community",
-    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=400&fit=crop",
-    featured: false,
-    github: "https://github.com/codrithm/hackathon-portal",
+    url: "#",
   },
   {
-    id: "p4",
-    name: "Open Source CLI Toolkit",
-    description: "A collection of developer tools and CLI utilities for project scaffolding, code generation, and development workflow automation.",
-    technologies: ["TypeScript", "Node.js", "Commander.js", "Ink"],
-    status: "Active",
-    category: "Open Source",
-    image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=600&h=400&fit=crop",
-    featured: true,
-    github: "https://github.com/codrithm/cli-toolkit",
+    id: "algo-visualizer",
+    title: "Algo Visualizer",
+    description: "Interactive visualization of sorting, searching, and graph algorithms with step-by-step explanations.",
+    techStack: ["TypeScript", "Canvas API", "React", "Framer Motion"],
+    category: "Education",
+    url: "#",
+    github: "#",
   },
   {
-    id: "p5",
-    name: "Student Portfolio Generator",
-    description: "An open-source tool that helps students create professional portfolios from their GitHub activity and project data.",
-    technologies: ["React", "GitHub API", "Tailwind CSS", "Vite"],
-    status: "Beta",
-    category: "Open Source",
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop",
-    featured: false,
-    github: "https://github.com/codrithm/portfolio-generator",
+    id: "devmetrics",
+    title: "DevMetrics",
+    description: "A developer productivity dashboard that aggregates GitHub activity, coding streaks, and project health metrics.",
+    techStack: ["Vue.js", "Python", "FastAPI", "Redis"],
+    category: "Analytics",
+    github: "#",
   },
   {
-    id: "p6",
-    name: "Cyber Range Lab",
-    description: "A virtual cybersecurity training environment with pre-configured vulnerable machines, challenges, and automated scoring.",
-    technologies: ["Docker", "Python", "Flask", "Vue.js"],
-    status: "Active",
-    category: "Community",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop",
-    featured: false,
-    github: "https://github.com/codrithm/cyber-range",
+    id: "green-code",
+    title: "Green Code",
+    description: "A carbon-aware CI/CD tool that schedules builds during low-carbon-intensity periods on the power grid.",
+    techStack: ["Go", "Docker", "GitHub Actions", "Carbon API"],
+    category: "Sustainability",
+    github: "#",
+  },
+  {
+    id: "skillforge",
+    title: "SkillForge",
+    description: "An AI-driven skill assessment platform that generates personalized roadmaps for aspiring developers.",
+    techStack: ["Python", "React", "OpenAI", "Supabase"],
+    category: "Education",
+    url: "#",
   },
 ];
-
-export type Project = typeof PROJECTS[0];
-
-export const PROJECT_CATEGORIES = ["All", "Enterprise", "Community", "Open Source"];
