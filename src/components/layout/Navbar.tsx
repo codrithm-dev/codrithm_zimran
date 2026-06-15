@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
-import { motion, AnimatePresence } from "framer-motion";
 import { Moon, Sun, Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/branding/Logo";
 import { MagneticButton } from "@/components/MagneticButton";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -24,6 +25,62 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const navRef = useRef<HTMLElement>(null);
+  const linksContainerRef = useRef<HTMLDivElement>(null);
+  const indicatorRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (navRef.current) {
+        gsap.from(navRef.current, {
+          y: -80,
+          opacity: 0,
+          duration: 0.6,
+          ease: "power3.out",
+        });
+      }
+
+      if (linksContainerRef.current) {
+        const links = linksContainerRef.current.querySelectorAll("a, button");
+        gsap.from(links, {
+          opacity: 0,
+          y: -10,
+          duration: 0.4,
+          stagger: 0.05,
+          delay: 0.3,
+          ease: "power3.out",
+        });
+      }
+    },
+    { scope: navRef },
+  );
+
+  // Sliding underline indicator
+  useEffect(() => {
+    if (!linksContainerRef.current || !indicatorRef.current) return;
+
+    const container = linksContainerRef.current;
+    const activeLink = container.querySelector(`[data-href="${location}"]`) as HTMLElement;
+
+    if (activeLink) {
+      const containerRect = container.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+
+      gsap.to(indicatorRef.current, {
+        x: linkRect.left - containerRect.left,
+        width: linkRect.width,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    } else {
+      gsap.to(indicatorRef.current, {
+        width: 0,
+        duration: 0.2,
+        ease: "power2.in",
+      });
+    }
+  }, [location]);
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
@@ -33,10 +90,8 @@ export function Navbar() {
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
   return (
-    <motion.nav
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+    <nav
+      ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-background/90 backdrop-blur-xl border-b border-border shadow-md"
@@ -49,21 +104,29 @@ export function Navbar() {
             <Logo size="sm" />
           </MagneticButton>
 
-          <div className="hidden lg:flex items-center gap-1">
+          <div ref={linksContainerRef} className="hidden lg:flex items-center gap-1 relative">
+            {/* Sliding underline indicator */}
+            <div
+              ref={indicatorRef}
+              className="absolute bottom-0 h-[2px] rounded-full"
+              style={{
+                background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)))",
+              }}
+            />
+
             {navLinks.map((link) => (
               <MagneticButton key={link.href} pullDistance={6}>
                 <Link href={link.href}>
-                  <motion.span
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.97 }}
+                  <span
+                    data-href={link.href}
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
                       location === link.href
-                        ? "bg-primary/15 text-primary"
+                        ? "text-primary"
                         : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     }`}
                   >
                     {link.label}
-                  </motion.span>
+                  </span>
                 </Link>
               </MagneticButton>
             ))}
@@ -71,9 +134,7 @@ export function Navbar() {
 
           <div className="flex items-center gap-2">
             <MagneticButton pullDistance={6}>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+              <button
                 onClick={toggleTheme}
                 className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
               >
@@ -100,7 +161,7 @@ export function Navbar() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.button>
+              </button>
             </MagneticButton>
 
             <Link href="/contact">
@@ -156,6 +217,6 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 }

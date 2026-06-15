@@ -1,6 +1,8 @@
+import { useRef } from "react";
 import { Link } from "wouter";
 import { Github, Twitter, Linkedin } from "lucide-react";
 import { Logo } from "@/components/branding/Logo";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 const footerLinks = {
   Company: [
@@ -24,11 +26,48 @@ const footerLinks = {
 };
 
 export function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!contentRef.current) return;
+
+      gsap.from(contentRef.current, {
+        opacity: 0,
+        y: 40,
+        duration: 0.6,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: "top 90%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      const columns = contentRef.current.querySelectorAll(".footer-col");
+      gsap.from(columns, {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        stagger: 0.1,
+        delay: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: "top 90%",
+          toggleActions: "play none none none",
+        },
+      });
+    },
+    { scope: footerRef },
+  );
+
   return (
-    <footer className="border-t border-border bg-card/50 mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer ref={footerRef} className="border-t border-border bg-card/50 mt-auto">
+      <div ref={contentRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="md:col-span-1">
+          <div className="md:col-span-1 footer-col">
             <div className="mb-3">
               <Logo size="sm" />
             </div>
@@ -49,7 +88,7 @@ export function Footer() {
           </div>
 
           {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title}>
+            <div key={title} className="footer-col">
               <h4 className="text-sm font-semibold mb-3">{title}</h4>
               <ul className="space-y-2">
                 {links.map((link) => (
