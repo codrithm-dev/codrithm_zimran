@@ -3,12 +3,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard, FileText, Users, Inbox, BarChart3,
   Settings, Code2, LogOut, ChevronLeft, ChevronRight,
+  BookOpen, FolderKanban, MessageSquare,
 } from "lucide-react";
 import { useState } from "react";
 
 const adminLinks = [
   { href: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/admin/content", icon: FileText, label: "Content" },
+  { href: "/admin/blog", icon: BookOpen, label: "Blog" },
+  { href: "/admin/projects", icon: FolderKanban, label: "Projects" },
+  { href: "/admin/inquiries", icon: MessageSquare, label: "Inquiries" },
   { href: "/admin/users", icon: Users, label: "Users" },
   { href: "/admin/requests", icon: Inbox, label: "Requests" },
   { href: "/admin/analytics", icon: BarChart3, label: "Analytics" },
@@ -53,7 +57,7 @@ export function AdminSidebar() {
         </motion.button>
       </div>
 
-      <nav className="flex-1 p-3 flex flex-col gap-1">
+      <nav className="flex-1 p-3 flex flex-col gap-1 overflow-y-auto">
         {adminLinks.map((link) => {
           const active = location === link.href;
           return (

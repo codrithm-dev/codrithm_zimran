@@ -30,12 +30,14 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold mb-3">Platform</h4>
+            <h4 className="text-sm font-semibold mb-3">Company</h4>
             <ul className="space-y-2">
               {[
-                { href: "/home", label: "Home" },
-                { href: "/categories", label: "Categories" },
-                { href: "/join", label: "Join Community" },
+                { href: "/about", label: "About Us" },
+                { href: "/services", label: "Services" },
+                { href: "/products", label: "Products" },
+                { href: "/team", label: "Team" },
+                { href: "/careers", label: "Careers" },
               ].map((l) => (
                 <li key={l.href}>
                   <Link href={l.href}>
@@ -49,12 +51,14 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold mb-3">Account</h4>
+            <h4 className="text-sm font-semibold mb-3">Resources</h4>
             <ul className="space-y-2">
               {[
-                { href: "/login", label: "Sign In" },
-                { href: "/profile", label: "Profile" },
-                { href: "/admin/login", label: "Admin" },
+                { href: "/home", label: "Home" },
+                { href: "/categories", label: "Categories" },
+                { href: "/blog", label: "Blog" },
+                { href: "/projects", label: "Projects" },
+                { href: "/contact", label: "Contact" },
               ].map((l) => (
                 <li key={l.href}>
                   <Link href={l.href}>
