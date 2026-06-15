@@ -1,6 +1,6 @@
 # Codrithm
 
-A student tech community platform where developers discover tech specializations, build real projects, and find their community. Features 10 learning categories, events, multi-step onboarding, user profiles, and a full admin dashboard.
+A modern software development company website showcasing services, products, projects, and the team behind Codrithm.
 
 ## Tech Stack
 
@@ -13,8 +13,7 @@ A student tech community platform where developers discover tech specializations
 | Animations | Framer Motion |
 | Routing | Wouter |
 | State | React Query |
-| Forms | React Hook Form + Zod |
-| Charts | Recharts |
+| 3D Graphics | Three.js + React Three Fiber |
 | Icons | Lucide React |
 
 ## Getting Started
@@ -22,8 +21,8 @@ A student tech community platform where developers discover tech specializations
 ```bash
 git clone https://github.com/codrithm-dev/codrithm.git
 cd codrithm
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 The dev server runs at `http://localhost:4173` by default.
@@ -32,32 +31,23 @@ The dev server runs at `http://localhost:4173` by default.
 
 | Command | Description |
 |---|---|
-| `npm run dev` | Start development server |
-| `npm run build` | Production build |
-| `npm run serve` | Preview production build |
-| `npm run typecheck` | Run TypeScript type checking |
+| `pnpm dev` | Start development server |
+| `pnpm build` | Production build |
+| `pnpm serve` | Preview production build |
+| `pnpm typecheck` | Run TypeScript type checking |
 
 ## Features
 
-### User-Facing
+### Pages
 
-- **Splash Screen** — Animated loading sequence with progress bar
-- **Home Page** — Hero section, stats, category grid, events, testimonials
-- **Authentication** — Login/signup with form validation (Zod schemas)
-- **Categories** — 10 tech tracks (Web Dev, AI/ML, Cybersecurity, etc.) with search and difficulty filters
-- **Category Detail** — Resources, projects, and member info per category
-- **Multi-Step Onboarding** — 3-step join flow (personal info, skills & interests, goals)
-- **Profile** — Stats, badges, activity feed, notification/settings toggles
-- **Events** — Workshops, hackathons, sprints, and bootcamps
-
-### Admin Panel
-
-- **Dashboard** — Member growth chart, activity log, top members table
-- **Content Management** — Category and event management
-- **User Management** — View and manage community members
-- **Join Requests** — Approve/reject membership applications
-- **Analytics** — Charts and data visualizations
-- **Settings** — Platform configuration
+- **Home** — Hero section, service grid, tech stack, products showcase, CTA
+- **About** — Company mission, stats, and leadership team
+- **Services** — 8 service offerings (Web Dev, Cloud, Security, Mobile, AI/ML, DevOps, Data, Design)
+- **Products** — Codrithm Learn, Connect, Deploy, and AI products
+- **Projects** — Open-source projects and community initiatives
+- **Team** — Leadership team with bios and social links
+- **Blog** — Engineering insights, tutorials, and perspectives
+- **Contact** — Contact form with validation
 
 ### UI/UX
 
@@ -66,73 +56,53 @@ The dev server runs at `http://localhost:4173` by default.
 - Parallax backgrounds and scroll reveal animations
 - Magnetic button hover effects
 - Page transitions with AnimatePresence
-- 3D hero scene with floating orbs and geometric shapes
+- Hero section with 3D floating orbs and geometric shapes
 - Responsive design across all screen sizes
 
 ## Project Structure
 
 ```
 src/
-├── components/          # Reusable UI components
-│   ├── ui/              # shadcn/ui primitives
-│   ├── AdminSidebar.tsx
-│   ├── AdminTopBar.tsx
-│   ├── CategoryCard.tsx
+├── components/
+│   ├── layout/           # Navbar, Footer
+│   ├── sections/         # Hero, ServiceGrid, TechStack, ContactForm
+│   ├── ui/               # shadcn/ui primitives
 │   ├── CustomCursor.tsx
-│   ├── EventCard.tsx
-│   ├── Footer.tsx
-│   ├── HeroScene.tsx
 │   ├── MagneticButton.tsx
-│   ├── Navbar.tsx
 │   ├── PageTransition.tsx
-│   ├── ParallaxBackground.tsx
-│   ├── ParallaxSection.tsx
 │   ├── ScrollReveal.tsx
+│   ├── ServiceCard.tsx
 │   ├── StatCard.tsx
 │   └── theme-provider.tsx
-├── data/                # Static data (categories, events, users, requests)
-├── hooks/               # Custom hooks (use-toast, use-mobile)
-├── lib/                 # Utilities
-├── pages/               # Route components
-│   ├── admin/           # Admin panel pages
-│   ├── Splash.tsx
-│   ├── Login.tsx
+├── data/                 # Static data (services, products, projects, team, blogs, categories)
+├── hooks/                # Custom hooks (use-toast, use-mobile)
+├── lib/                  # Utilities (cn)
+├── pages/
 │   ├── Home.tsx
-│   ├── Categories.tsx
-│   ├── CategoryDetail.tsx
-│   ├── Join.tsx
-│   ├── Profile.tsx
-│   ├── Confirmation.tsx
-│   └── not-found.tsx
-├── App.tsx              # Root component with providers and router
-├── main.tsx             # Entry point
-└── index.css            # Global styles and theme variables
+│   ├── About.tsx
+│   ├── Blog.tsx
+│   ├── Contact.tsx
+│   ├── Products.tsx
+│   ├── Projects.tsx
+│   ├── Team.tsx
+│   └── NotFound.tsx
+├── App.tsx               # Root component with providers and router
+├── main.tsx              # Entry point
+└── index.css             # Global styles and theme variables
 ```
 
 ## Routes
 
 | Path | Page |
 |---|---|
-| `/` | Splash screen |
-| `/login` | Login/Signup |
-| `/home` | Home page |
-| `/categories` | Category listing |
-| `/categories/:id` | Category detail |
-| `/join` | Multi-step onboarding |
-| `/profile` | User profile |
-| `/confirmation` | Post-signup confirmation |
-| `/admin/login` | Admin login |
-| `/admin/dashboard` | Admin dashboard |
-| `/admin/content` | Content management |
-| `/admin/users` | User management |
-| `/admin/requests` | Join requests |
-| `/admin/analytics` | Analytics |
-| `/admin/settings` | Admin settings |
-
-## Demo Credentials
-
-- **User:** `demo@codrithm.dev` / `password123`
-- **Admin:** `admin@codrithm.dev` / `admin123`
+| `/` | Home |
+| `/about` | About |
+| `/services` | Services |
+| `/blog` | Blog |
+| `/contact` | Contact |
+| `/products` | Products |
+| `/projects` | Projects |
+| `/team` | Team |
 
 ## Contributing
 
