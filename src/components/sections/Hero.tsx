@@ -1,81 +1,117 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
 import { Link } from "wouter";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ScrollReveal } from "@/components/ScrollReveal";
 import { MagneticButton } from "@/components/MagneticButton";
+import { FloatingParticles } from "@/components/FloatingParticles";
+import { HeroStatCounter } from "@/components/HeroStatCounter";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 export function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const blobLeftRef = useRef<HTMLDivElement>(null);
+  const blobRightRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.from(badgeRef.current, { opacity: 0, scale: 0.8, duration: 0.5 })
+        .from(headingRef.current, { opacity: 0, y: 40, duration: 0.7 }, "-=0.2")
+        .from(subtitleRef.current, { opacity: 0, y: 30, duration: 0.5 }, "-=0.3")
+        .from(buttonsRef.current, { opacity: 0, y: 20, duration: 0.5 }, "-=0.2")
+        .from(statsRef.current, { opacity: 0, y: 20, duration: 0.5 }, "-=0.2");
+
+      // Floating blob animation
+      if (blobLeftRef.current) {
+        gsap.to(blobLeftRef.current, {
+          y: 30,
+          x: 15,
+          duration: 4,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      }
+      if (blobRightRef.current) {
+        gsap.to(blobRightRef.current, {
+          y: -25,
+          x: -20,
+          duration: 5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      }
+    },
+    { scope: containerRef },
+  );
+
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-20" />
 
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
+      {/* Floating particles */}
+      <FloatingParticles count={35} />
+
+      <div ref={blobLeftRef} className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+      <div ref={blobRightRef} className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-3xl">
-          <ScrollReveal>
-            <div className="flex items-center gap-2 mb-6">
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-medium">
-                <Sparkles className="w-3 h-3" />
-                Software Solutions & Tech Education
-              </div>
+          <div ref={badgeRef} className="flex items-center gap-2 mb-6">
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-medium">
+              <Sparkles className="w-3 h-3" />
+              Software Solutions & Tech Education
             </div>
-          </ScrollReveal>
+          </div>
 
-          <ScrollReveal delay={0.1}>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] mb-6">
-              <span className="text-gradient">Engineering</span>{" "}
-              the Future of{" "}
-              <span className="text-gradient">Technology</span>
-            </h1>
-          </ScrollReveal>
+          <h1
+            ref={headingRef}
+            className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] mb-6"
+          >
+            <span className="text-gradient">Engineering</span>{" "}
+            the Future of{" "}
+            <span className="text-gradient">Technology</span>
+          </h1>
 
-          <ScrollReveal delay={0.2}>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-xl">
-              Codrithm delivers enterprise software solutions and cultivates the next generation
-              of developers through hands-on, project-based learning.
-            </p>
-          </ScrollReveal>
+          <p
+            ref={subtitleRef}
+            className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-xl"
+          >
+            Codrithm delivers enterprise software solutions and cultivates the next generation
+            of developers through hands-on, project-based learning.
+          </p>
 
-          <ScrollReveal delay={0.3}>
-            <div className="flex flex-wrap gap-3">
-              <MagneticButton pullDistance={10}>
-                <Link href="/contact">
-                  <Button size="lg" className="glow-primary text-base px-6 cursor-pointer">
-                    Get in Touch <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
-              </MagneticButton>
-              <MagneticButton pullDistance={10}>
-                <Link href="/services">
-                  <Button size="lg" variant="outline" className="text-base px-6 cursor-pointer">
-                    Our Services
-                  </Button>
-                </Link>
-              </MagneticButton>
-            </div>
-          </ScrollReveal>
+          <div ref={buttonsRef} className="flex flex-wrap gap-3">
+            <MagneticButton pullDistance={10}>
+              <Link href="/contact">
+                <Button size="lg" className="glow-primary text-base px-6 cursor-pointer">
+                  Get in Touch <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </MagneticButton>
+            <MagneticButton pullDistance={10}>
+              <Link href="/services">
+                <Button size="lg" variant="outline" className="text-base px-6 cursor-pointer">
+                  Our Services
+                </Button>
+              </Link>
+            </MagneticButton>
+          </div>
 
-          <ScrollReveal delay={0.4}>
-            <div className="flex items-center gap-8 mt-12 text-sm text-muted-foreground">
-              <div>
-                <div className="text-2xl font-bold text-foreground">50+</div>
-                <div>Projects Delivered</div>
-              </div>
-              <div className="w-px h-10 bg-border" />
-              <div>
-                <div className="text-2xl font-bold text-foreground">3K+</div>
-                <div>Students Trained</div>
-              </div>
-              <div className="w-px h-10 bg-border" />
-              <div>
-                <div className="text-2xl font-bold text-foreground">99%</div>
-                <div>Client Satisfaction</div>
-              </div>
-            </div>
-          </ScrollReveal>
+          <div ref={statsRef} className="flex items-center gap-8 mt-12 text-sm text-muted-foreground">
+            <HeroStatCounter value={50} suffix="+" label="Projects Delivered" duration={2} />
+            <div className="w-px h-10 bg-border" />
+            <HeroStatCounter value={3} suffix="K+" label="Students Trained" duration={1.8} delay={0.2} />
+            <div className="w-px h-10 bg-border" />
+            <HeroStatCounter value={99} suffix="%" label="Client Satisfaction" duration={2.2} delay={0.4} />
+          </div>
         </div>
       </div>
     </section>

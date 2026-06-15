@@ -9,6 +9,7 @@ import { TechStack } from "@/components/sections/TechStack";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { PageTransition } from "@/components/PageTransition";
 import { MagneticButton } from "@/components/MagneticButton";
+import { GradientPulse } from "@/components/GradientPulse";
 import { PRODUCTS } from "@/data/products";
 
 export default function Home() {
@@ -76,30 +77,32 @@ export default function Home() {
         <section className="py-20 bg-muted/20 relative overflow-hidden">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <ScrollReveal>
-              <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 rounded-2xl p-12">
-                <h2 className="text-4xl font-black mb-4">
-                  Ready to <span className="text-gradient">build something?</span>
-                </h2>
-                <p className="text-muted-foreground mb-8 text-lg">
-                  Whether you need a software partner or want to join our learning community.
-                </p>
-                <div className="flex flex-wrap gap-3 justify-center">
-                  <MagneticButton pullDistance={12}>
-                    <Link href="/contact">
-                      <Button size="lg" className="glow-primary text-base px-8 cursor-pointer">
-                        Start a Project <ArrowRight className="w-4 h-4 ml-2" />
-                      </Button>
-                    </Link>
-                  </MagneticButton>
-                  <MagneticButton pullDistance={12}>
-                    <Link href="/about">
-                      <Button size="lg" variant="outline" className="text-base px-8 cursor-pointer">
-                        Learn About Us
-                      </Button>
-                    </Link>
-                  </MagneticButton>
+              <GradientPulse>
+                <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 rounded-2xl p-12">
+                  <h2 className="text-4xl font-black mb-4">
+                    Ready to <span className="text-gradient">build something?</span>
+                  </h2>
+                  <p className="text-muted-foreground mb-8 text-lg">
+                    Whether you need a software partner or want to join our learning community.
+                  </p>
+                  <div className="flex flex-wrap gap-3 justify-center">
+                    <MagneticButton pullDistance={12}>
+                      <Link href="/contact">
+                        <Button size="lg" className="glow-primary text-base px-8 cursor-pointer">
+                          Start a Project <ArrowRight className="w-4 h-4 ml-2" />
+                        </Button>
+                      </Link>
+                    </MagneticButton>
+                    <MagneticButton pullDistance={12}>
+                      <Link href="/about">
+                        <Button size="lg" variant="outline" className="text-base px-8 cursor-pointer">
+                          Learn About Us
+                        </Button>
+                      </Link>
+                    </MagneticButton>
+                  </div>
                 </div>
-              </div>
+              </GradientPulse>
             </ScrollReveal>
           </div>
         </section>

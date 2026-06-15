@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import { CustomCursor } from "@/components/CustomCursor";
+import { PageLoader } from "@/components/PageLoader";
+import { ScrollProgressBar } from "@/components/ScrollProgressBar";
 
 import Home from "@/pages/Home";
 import About from "@/pages/About";
@@ -40,6 +42,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="dark" storageKey="codrithm-theme">
         <TooltipProvider>
+          <PageLoader />
+          <ScrollProgressBar />
           <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
             <Router />
           </WouterRouter>
