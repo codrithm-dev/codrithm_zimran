@@ -11,7 +11,7 @@ import { PROJECTS } from "@/data/projects";
 
 export default function AdminProjects() {
   const [projects, setProjects] = useState(
-    PROJECTS.map((p) => ({ ...p, approved: p.status === "Active" || p.status === "Completed" }))
+    PROJECTS.map((p) => ({ ...p, approved: p.status === "Active" || p.status === "Completed", name: p.name ?? p.title }))
   );
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
 

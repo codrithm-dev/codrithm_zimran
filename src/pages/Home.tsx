@@ -32,8 +32,8 @@ export default function Home() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {PRODUCTS.map((product, i) => (
-                <ScrollReveal key={product.id} delay={i * 0.1}>
-                  <div className="bg-card border border-card-border rounded-xl p-6 h-full">
+                <ScrollReveal key={product.id} delay={i * 0.12}>
+                  <div className="bg-card border border-card-border rounded-xl p-6 h-full hover:-translate-y-1 transition-transform duration-300">
                     <div className="flex items-center gap-2 mb-3">
                       <h3 className="font-semibold">{product.name}</h3>
                       <span
@@ -62,7 +62,7 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="text-center mt-8">
+            <ScrollReveal delay={0.2} className="text-center mt-8">
               <MagneticButton pullDistance={10}>
                 <Link href="/products">
                   <Button variant="outline">
@@ -70,7 +70,7 @@ export default function Home() {
                   </Button>
                 </Link>
               </MagneticButton>
-            </div>
+            </ScrollReveal>
           </div>
         </section>
 
@@ -79,28 +79,34 @@ export default function Home() {
             <ScrollReveal>
               <GradientPulse>
                 <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 rounded-2xl p-12">
-                  <h2 className="text-4xl font-black mb-4">
-                    Ready to <span className="text-gradient">build something?</span>
-                  </h2>
-                  <p className="text-muted-foreground mb-8 text-lg">
-                    Whether you need a software partner or want to join our learning community.
-                  </p>
-                  <div className="flex flex-wrap gap-3 justify-center">
-                    <MagneticButton pullDistance={12}>
-                      <Link href="/contact">
-                        <Button size="lg" className="glow-primary text-base px-8 cursor-pointer">
-                          Start a Project <ArrowRight className="w-4 h-4 ml-2" />
-                        </Button>
-                      </Link>
-                    </MagneticButton>
-                    <MagneticButton pullDistance={12}>
-                      <Link href="/about">
-                        <Button size="lg" variant="outline" className="text-base px-8 cursor-pointer">
-                          Learn About Us
-                        </Button>
-                      </Link>
-                    </MagneticButton>
-                  </div>
+                  <ScrollReveal>
+                    <h2 className="text-4xl font-black mb-4">
+                      Ready to <span className="text-gradient">build something?</span>
+                    </h2>
+                  </ScrollReveal>
+                  <ScrollReveal delay={0.1}>
+                    <p className="text-muted-foreground mb-8 text-lg">
+                      Whether you need a software partner or want to join our learning community.
+                    </p>
+                  </ScrollReveal>
+                  <ScrollReveal delay={0.2}>
+                    <div className="flex flex-wrap gap-3 justify-center">
+                      <MagneticButton pullDistance={12}>
+                        <Link href="/contact">
+                          <Button size="lg" className="glow-primary text-base px-8 cursor-pointer">
+                            Start a Project <ArrowRight className="w-4 h-4 ml-2" />
+                          </Button>
+                        </Link>
+                      </MagneticButton>
+                      <MagneticButton pullDistance={12}>
+                        <Link href="/about">
+                          <Button size="lg" variant="outline" className="text-base px-8 cursor-pointer">
+                            Learn About Us
+                          </Button>
+                        </Link>
+                      </MagneticButton>
+                    </div>
+                  </ScrollReveal>
                 </div>
               </GradientPulse>
             </ScrollReveal>

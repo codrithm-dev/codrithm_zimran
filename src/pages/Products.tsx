@@ -6,6 +6,7 @@ import { PRODUCTS } from "@/data/products";
 import { ExternalLink } from "lucide-react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { GsapTextReveal } from "@/components/gsap/GsapTextReveal";
+import { GsapReveal } from "@/components/gsap/GsapReveal";
 import { CardTilt } from "@/components/CardTilt";
 
 export default function Products() {
@@ -43,9 +44,11 @@ export default function Products() {
             <GsapTextReveal as="h1" className="text-4xl sm:text-5xl font-black mb-4">
               Our Products
             </GsapTextReveal>
-            <p className="text-lg text-muted-foreground max-w-2xl">
-              Tools and platforms designed to empower developers and streamline workflows.
-            </p>
+            <GsapReveal delay={0.15}>
+              <p className="text-lg text-muted-foreground max-w-2xl">
+                Tools and platforms designed to empower developers and streamline workflows.
+              </p>
+            </GsapReveal>
           </div>
         </section>
 

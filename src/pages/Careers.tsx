@@ -16,6 +16,7 @@ import { ParallaxBackground } from "@/components/ParallaxBackground";
 import { CAREERS, CAREER_TYPES } from "@/data/careers";
 import type { Career } from "@/data/careers";
 
+
 const applicationSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
