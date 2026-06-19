@@ -53,7 +53,7 @@ export function Hero() {
   );
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden">
+    <section ref={containerRef} className="relative z-0 min-h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-20" />
 
       {/* Floating particles */}

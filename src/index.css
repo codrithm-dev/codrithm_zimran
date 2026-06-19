@@ -261,7 +261,7 @@
   }
 
   .glow-primary {
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.4), 0 0 40px hsl(var(--primary) / 0.2);
+    box-shadow: 0 0 20px rgba(43,100,217,0.4), 0 0 40px rgba(43,100,217,0.2);
   }
 
   .glow-secondary {

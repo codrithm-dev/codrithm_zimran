@@ -24,6 +24,32 @@ export function Navbar() {
   const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+
+  const activeLinkStyle = {
+    background: "linear-gradient(to right, #2B64D9, #8BECAE)",
+    WebkitBackgroundClip: "text",
+    backgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    transition: "all 0.3s ease",
+  } as const;
+
+  const hoverLinkStyle = {
+    background: "linear-gradient(to right, #2B64D9, #8BECAE)",
+    WebkitBackgroundClip: "text",
+    backgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    transition: "all 0.3s ease",
+  } as const;
+
+  const hoverUnderlineStyle = {
+    backgroundImage: "linear-gradient(to right, #2B64D9, #8BECAE)",
+    backgroundPosition: "left bottom",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "100% 2px",
+    opacity: 0.5,
+    transition: "all 0.3s ease",
+  } as const;
 
   const navRef = useRef<HTMLElement>(null);
   const linksContainerRef = useRef<HTMLDivElement>(null);
@@ -92,11 +118,13 @@ export function Navbar() {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/90 backdrop-blur-xl border-b border-border shadow-md"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "shadow-md" : ""}`}
+      style={{
+        backgroundImage: "linear-gradient(to right, rgba(43,100,217,0.18), rgba(255,255,255,0.18))",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(43, 100, 217, 0.25)",
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -110,26 +138,41 @@ export function Navbar() {
               ref={indicatorRef}
               className="absolute bottom-0 h-[2px] rounded-full"
               style={{
-                background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)))",
+                background: "linear-gradient(to right, #2B64D9, #8BECAE)",
               }}
             />
 
-            {navLinks.map((link) => (
-              <MagneticButton key={link.href} pullDistance={6}>
-                <Link href={link.href}>
-                  <span
-                    data-href={link.href}
-                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
-                      location === link.href
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                    }`}
-                  >
-                    {link.label}
-                  </span>
-                </Link>
-              </MagneticButton>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = location === link.href;
+              const isHovered = hoveredLink === link.href;
+
+              return (
+                <MagneticButton key={link.href} pullDistance={6}>
+                  <Link href={link.href}>
+                    <span
+                      data-href={link.href}
+                      onMouseEnter={() => setHoveredLink(link.href)}
+                      onMouseLeave={() => setHoveredLink(null)}
+                      className={`relative px-3 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all duration-300 ease-in-out ${
+                        isActive
+                          ? ""
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                      style={isActive ? activeLinkStyle : isHovered ? hoverLinkStyle : undefined}
+                    >
+                      {link.label}
+                      {isHovered && !isActive ? (
+                        <span
+                          aria-hidden="true"
+                          className="absolute left-0 right-0 bottom-0 h-[2px]"
+                          style={hoverUnderlineStyle}
+                        />
+                      ) : null}
+                    </span>
+                  </Link>
+                </MagneticButton>
+              );
+            })}
           </div>
 
           <div className="flex items-center gap-2">
@@ -187,7 +230,13 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-border"
+            className="lg:hidden border-b"
+            style={{
+              backgroundImage: "linear-gradient(to right, rgba(43,100,217,0.18), rgba(255,255,255,0.18))",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+              borderBottom: "1px solid rgba(43, 100, 217, 0.25)",
+            }}
           >
             <div className="px-4 py-4 flex flex-col gap-2">
               {navLinks.map((link) => (

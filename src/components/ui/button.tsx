@@ -10,9 +10,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-           // @replit: no hover, and add primary border
-           "bg-primary text-primary-foreground border border-primary-border",
+         default:
+           // Outlined blue CTA: transparent background, 2px blue border, blue text, with hover
+           "bg-transparent text-[#2B64D9] border-2 border-[#2B64D9] hover:bg-[#2B64D9] hover:text-white transition-all duration-300 ease-in-out",
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm border-destructive-border",
         outline:

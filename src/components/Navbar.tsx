@@ -49,11 +49,13 @@ export function Navbar() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/90 backdrop-blur-xl border-b border-border shadow-md"
-          : "bg-transparent"
-      }`}
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? "shadow-md" : ""}`}
+      style={{
+        backgroundImage: "linear-gradient(to right, rgba(43,100,217,0.18), rgba(255,255,255,0.18))",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(43, 100, 217, 0.25)",
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -188,7 +190,13 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-border"
+            className="lg:hidden border-b"
+            style={{
+              backgroundImage: "linear-gradient(to right, rgba(43,100,217,0.18), rgba(255,255,255,0.18))",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+              borderBottom: "1px solid rgba(43, 100, 217, 0.25)",
+            }}
           >
             <div className="px-4 py-4 flex flex-col gap-2 max-h-[70vh] overflow-y-auto">
               {navLinks.map((link) =>
