@@ -9,11 +9,7 @@ import { AdminTopBar } from "@/components/AdminTopBar";
 import { PageTransition } from "@/components/PageTransition";
 import { USERS } from "@/data/users";
 
-const ALL_USERS = [
-  ...USERS,
-  { id: "u5", name: "Sam Smith", email: "sam@university.edu", role: "student", skills: ["HTML", "CSS"], joinDate: "2026-04-12", stats: { projectsBuilt: 0, eventsAttended: 0, streakDays: 0, contributions: 0, badges: [] }, activity: [], interests: [], bio: "", avatar: null, status: "Pending" },
-  { id: "u6", name: "Carlos Mendez", email: "carlos@tech.edu", role: "student", skills: ["React", "JS"], joinDate: "2026-04-10", stats: { projectsBuilt: 3, eventsAttended: 2, streakDays: 5, contributions: 4, badges: [] }, activity: [], interests: [], bio: "", avatar: null, status: "Active" },
-];
+const ALL_USERS = [...USERS];
 
 const STATUS_COLORS: Record<string, string> = {
   student: "text-blue-400 bg-blue-400/10 border-blue-400/20",
@@ -82,7 +78,7 @@ export default function AdminUsers() {
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-2">
                           <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">
-                            {user.name.split(" ").map(n => n[0]).join("")}
+                            {user.name ? user.name.split(" ").map(n => n[0]).join("") : "?"}
                           </div>
                           <div>
                             <p className="font-medium text-xs">{user.name}</p>

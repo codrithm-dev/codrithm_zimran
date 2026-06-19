@@ -39,7 +39,7 @@ export default function Profile() {
               <div className="flex flex-col sm:flex-row sm:items-start gap-5">
                 <Avatar className="w-20 h-20">
                   <AvatarFallback className="bg-primary/20 text-primary text-2xl font-bold">
-                    {user.name.split(" ").map((n) => n[0]).join("")}
+                    {user.name ? user.name.split(" ").map((n) => n[0]).join("") : "?"}
                   </AvatarFallback>
                 </Avatar>
 

@@ -45,9 +45,11 @@ export default function Blog() {
             <GsapTextReveal as="h1" className="text-4xl sm:text-5xl font-black mb-4">
               Our Blog
             </GsapTextReveal>
-            <p className="text-lg text-muted-foreground max-w-2xl">
-              Insights, tutorials, and perspectives from our engineering and design teams.
-            </p>
+            <GsapReveal delay={0.15}>
+              <p className="text-lg text-muted-foreground max-w-2xl">
+                Insights, tutorials, and perspectives from our engineering and design teams.
+              </p>
+            </GsapReveal>
           </div>
         </section>
 
@@ -95,17 +97,21 @@ export default function Blog() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <GsapReveal>
               <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 rounded-2xl p-12">
-                <h2 className="text-3xl font-black mb-4">
+                <GsapTextReveal as="h2" className="text-3xl font-black mb-4">
                   Want to <span className="text-gradient">contribute?</span>
-                </h2>
-                <p className="text-muted-foreground mb-6">
-                  We welcome guest posts from developers and educators. Share your knowledge with our community.
-                </p>
-                <MagneticButton pullDistance={10}>
-                  <Button variant="outline">
-                    Write for Us <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </MagneticButton>
+                </GsapTextReveal>
+                <GsapReveal delay={0.15}>
+                  <p className="text-muted-foreground mb-6">
+                    We welcome guest posts from developers and educators. Share your knowledge with our community.
+                  </p>
+                </GsapReveal>
+                <GsapReveal delay={0.25}>
+                  <MagneticButton pullDistance={10}>
+                    <Button variant="outline">
+                      Write for Us <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </MagneticButton>
+                </GsapReveal>
               </div>
             </GsapReveal>
           </div>
