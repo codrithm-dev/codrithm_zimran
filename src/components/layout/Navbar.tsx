@@ -59,7 +59,7 @@ export function Navbar() {
           onClick={() => scrollTo("#home")}
           className="flex items-center cursor-pointer bg-transparent border-0 p-0 shrink-0"
         >
-          <Logo heightPx={24} showText={true} />
+          <Logo heightPx={32} showText={true} />
         </button>
 
         {/* Desktop: centered pill nav */}

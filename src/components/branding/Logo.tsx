@@ -11,9 +11,9 @@ interface LogoProps {
 }
 
 const sizes = {
-  sm: { icon: "w-6 h-6", iconInner: "w-3 h-3", text: "text-base" },
-  md: { icon: "w-8 h-8", iconInner: "w-4 h-4", text: "text-lg" },
-  lg: { icon: "w-10 h-10", iconInner: "w-5 h-5", text: "text-xl" },
+  sm: { icon: "w-6 h-6", iconInner: "w-3 h-3", text: "text-xl" },
+  md: { icon: "w-8 h-8", iconInner: "w-4 h-4", text: "text-2xl" },
+  lg: { icon: "w-10 h-10", iconInner: "w-5 h-5", text: "text-3xl" },
 };
 
 export function Logo({ size = "md", showText = true, href = "/", heightPx }: LogoProps) {
@@ -23,12 +23,12 @@ export function Logo({ size = "md", showText = true, href = "/", heightPx }: Log
 
   const imgStyle: React.CSSProperties = heightPx
     ? { height: `${heightPx}px`, width: "auto" }
-    : { height: "1em", width: "auto" };
+    : { height: "1.2em", width: "auto" };
 
   return (
     <Link href={href}>
       <motion.div
-        className="flex items-center gap-2 cursor-pointer"
+        className="flex items-center gap-3 cursor-pointer"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.97 }}
       >
@@ -44,7 +44,7 @@ export function Logo({ size = "md", showText = true, href = "/", heightPx }: Log
           <span
             className={`font-bold ${s.text}`}
             style={{
-              fontFamily: "'Comfortaa', cursive",
+              fontFamily: "'Orenza', sans-serif",
               fontWeight: 700,
               color: isDark ? "#fff" : "#1a1a2e",
             }}
