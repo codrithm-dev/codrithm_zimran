@@ -4,7 +4,7 @@ import { ArrowLeft, Users, BookOpen, Code2, Star, ChevronRight } from "lucide-re
 import * as LucideIcons from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Navbar } from "@/components/Navbar";
+import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { PageTransition } from "@/components/PageTransition";

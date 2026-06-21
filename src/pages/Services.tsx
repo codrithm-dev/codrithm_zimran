@@ -1,5 +1,5 @@
 import { Brain, Code2, Cloud, Lightbulb, ArrowRight } from "lucide-react";
-import { Navbar } from "@/components/Navbar";
+import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/Footer";
 import { PageTransition } from "@/components/PageTransition";
 import { ScrollReveal } from "@/components/ScrollReveal";

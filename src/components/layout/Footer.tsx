@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Link } from "wouter";
-import { Github, Twitter, Linkedin } from "lucide-react";
+import { Github, Twitter, Linkedin } from "@/components/icons";
 import { Logo } from "@/components/branding/Logo";
 import { gsap, useGSAP } from "@/lib/gsap";
 

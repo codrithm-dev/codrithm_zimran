@@ -188,12 +188,6 @@
   }
   body {
     @apply font-sans antialiased bg-background text-foreground;
-    cursor: none;
-  }
-
-  /* Restore cursor on touch / coarse-pointer devices */
-  @media (pointer: coarse) {
-    body { cursor: auto; }
   }
 }
 
