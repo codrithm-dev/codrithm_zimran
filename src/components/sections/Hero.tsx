@@ -65,7 +65,7 @@ export function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-3xl">
           <div ref={badgeRef} className="flex items-center gap-2 mb-6">
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-medium">
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs text-white font-medium">
               <Sparkles className="w-3 h-3" />
               Software Solutions & Tech Education
             </div>

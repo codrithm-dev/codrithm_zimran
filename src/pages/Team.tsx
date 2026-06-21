@@ -58,16 +58,19 @@ export default function Team() {
               {TEAM.map((member) => (
                 <div
                   key={member.id}
-                  className="bg-card border border-card-border rounded-xl p-8 text-center hover:-translate-y-1 transition-transform"
+                  className="rounded-xl p-8 text-center hover:-translate-y-1 hover:shadow-lg"
+                  style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
                 >
                   <img
                     src={member.avatar}
                     alt={member.name}
                     className="w-24 h-24 rounded-full mx-auto mb-4 bg-muted"
                   />
-                  <h3 className="font-semibold text-lg">{member.name}</h3>
+                  <h3 className="font-semibold text-lg" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{member.name}</h3>
                   <div className="text-sm text-primary font-medium mb-3">{member.role}</div>
-                  <p className="text-sm text-muted-foreground mb-4">{member.bio}</p>
+                  <p className="text-sm mb-4" style={{ color: "#FFFFFF" }}>{member.bio}</p>
                   {member.social && (
                     <div className="flex items-center justify-center gap-2">
                       {member.social.github && (

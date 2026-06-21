@@ -57,7 +57,10 @@ export function CategoryCard({ category, delay = 0 }: CategoryCardProps) {
         <motion.div
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="bg-card border border-card-border rounded-xl p-5 cursor-pointer group transition-all duration-300 hover:border-primary/40 hover:shadow-lg h-full"
+          style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+          className="rounded-xl p-5 cursor-pointer group h-full hover:shadow-lg"
+          onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
         >
           <div className="flex items-start justify-between mb-3">
             <div
@@ -75,10 +78,10 @@ export function CategoryCard({ category, delay = 0 }: CategoryCardProps) {
             </span>
           </div>
 
-          <h3 className="font-semibold text-sm mb-1 group-hover:text-primary transition-colors">
+          <h3 className="font-semibold text-sm mb-1" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             {category.name}
           </h3>
-          <p className="text-xs text-muted-foreground line-clamp-2 mb-3">
+          <p className="text-xs line-clamp-2 mb-3" style={{ color: "#FFFFFF" }}>
             {category.description}
           </p>
 

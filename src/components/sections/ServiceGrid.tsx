@@ -49,15 +49,20 @@ export function ServiceGrid() {
         >
           {SERVICES.map((service) => (
             <CardTilt key={service.id}>
-              <div className="group bg-card border border-card-border rounded-xl p-6 h-full hover:border-primary/30 transition-colors">
+              <div
+              className="group rounded-xl p-6 h-full hover:shadow-lg"
+              style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+            >
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <service.icon className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="font-semibold mb-2">{service.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{service.description}</p>
+                <h3 className="font-semibold mb-2" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{service.title}</h3>
+                <p className="text-sm mb-4" style={{ color: "#FFFFFF" }}>{service.description}</p>
                 <ul className="space-y-1">
                   {service.features.map((f) => (
-                    <li key={f} className="text-xs text-muted-foreground flex items-center gap-1.5">
+                    <li key={f} className="text-xs flex items-center gap-1.5" style={{ color: "#FFFFFF" }}>
                       <div className="w-1 h-1 rounded-full bg-primary/50" />
                       {f}
                     </li>

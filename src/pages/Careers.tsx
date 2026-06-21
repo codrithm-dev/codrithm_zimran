@@ -115,20 +115,27 @@ export default function Careers() {
                       tabIndex={0}
                       aria-pressed={selectedJob?.id === career.id}
                       aria-label={`Apply for ${career.title}`}
-                      className={`bg-card border rounded-xl p-5 cursor-pointer transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
+                      className={`rounded-xl p-5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 hover:shadow-lg ${
                         selectedJob?.id === career.id
-                          ? "border-primary shadow-lg"
-                          : "border-card-border hover:border-primary/40"
+                          ? "shadow-lg"
+                          : ""
                       }`}
+                      style={{
+                        background: selectedJob?.id === career.id ? "#112240" : "#0D1B2A",
+                        border: selectedJob?.id === career.id ? "1px solid rgba(43,100,217,0.6)" : "1px solid rgba(43,100,217,0.2)",
+                        transition: "all 0.3s ease",
+                      }}
+                      onMouseEnter={(e) => { if (selectedJob?.id !== career.id) { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; } }}
+                      onMouseLeave={(e) => { if (selectedJob?.id !== career.id) { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; } }}
                     >
                       <div className="flex items-start justify-between mb-2">
-                        <h3 className="font-bold">{career.title}</h3>
+                        <h3 className="font-bold" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{career.title}</h3>
                         <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${TYPE_COLORS[career.employmentType]}`}>
                           {career.employmentType}
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{career.description}</p>
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                      <p className="text-sm mb-3 line-clamp-2" style={{ color: "#FFFFFF" }}>{career.description}</p>
+                      <div className="flex items-center gap-4 text-xs" style={{ color: "#FFFFFF" }}>
                         <span className="flex items-center gap-1"><Briefcase className="w-3 h-3" />{career.department}</span>
                         <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{career.location}</span>
                         <span className="flex items-center gap-1"><Clock className="w-3 h-3" />Posted {career.postedDate}</span>
@@ -156,8 +163,11 @@ export default function Careers() {
 
             <div className="lg:col-span-1">
               <ScrollReveal delay={0.2}>
-                <div className="bg-card border border-card-border rounded-xl p-6 sticky top-24">
-                  <h2 className="text-lg font-bold mb-4">
+                <div
+                    className="rounded-xl p-6 sticky top-24"
+                    style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+                  >
+                  <h2 className="text-lg font-bold mb-4" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                     {selectedJob ? `Apply for ${selectedJob.title}` : "Quick Application"}
                   </h2>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" noValidate>

@@ -86,13 +86,19 @@ export function ContactForm() {
                 { icon: Phone, label: "Phone", value: "+92 300 1234567" },
                 { icon: MapPin, label: "Office", value: "Karachi, Pakistan" },
               ].map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex items-start gap-4">
+                <div
+                    key={label}
+                    className="flex items-start gap-4 rounded-xl p-4"
+                    style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                  >
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                     <Icon className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <div className="text-sm font-medium">{label}</div>
-                    <div className="text-sm text-muted-foreground">{value}</div>
+                    <div className="text-sm font-medium" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{label}</div>
+                    <div className="text-sm" style={{ color: "#FFFFFF" }}>{value}</div>
                   </div>
                 </div>
               ))}
@@ -100,7 +106,7 @@ export function ContactForm() {
           </div>
 
           <div ref={rightRef}>
-            <form onSubmit={handleSubmit} className="bg-card border border-card-border rounded-xl p-6 space-y-4">
+            <form onSubmit={handleSubmit} className="rounded-xl p-6 space-y-4" style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)" }}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="form-field">
                   <label className="text-sm font-medium mb-1.5 block">Name</label>

@@ -29,7 +29,10 @@ export function EventCard({ event, delay = 0 }: EventCardProps) {
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay }}
       whileHover={{ x: 4 }}
-      className="bg-card border border-card-border rounded-xl p-4 group hover:border-primary/30 transition-all duration-300"
+      style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+      className="rounded-xl p-4 group hover:shadow-lg"
+      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
+      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
       data-testid={`card-event-${event.id}`}
     >
       <div className="flex items-start gap-3">
@@ -40,7 +43,7 @@ export function EventCard({ event, delay = 0 }: EventCardProps) {
 
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2 mb-1">
-            <h4 className="font-semibold text-sm leading-snug group-hover:text-primary transition-colors">
+            <h4 className="font-semibold text-sm leading-snug" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               {event.title}
             </h4>
             <span
@@ -52,7 +55,7 @@ export function EventCard({ event, delay = 0 }: EventCardProps) {
             </span>
           </div>
 
-          <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+          <div className="flex flex-wrap gap-2 text-xs" style={{ color: "#FFFFFF" }}>
             <span className="flex items-center gap-1">
               <Clock className="w-3 h-3" /> {timeStr}
             </span>

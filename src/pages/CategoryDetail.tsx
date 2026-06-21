@@ -118,8 +118,13 @@ export default function CategoryDetail() {
             <div className="lg:col-span-2 space-y-8">
               <ParallaxSection speed={0.15}>
               <ScrollReveal>
-                <div className="bg-card border border-card-border rounded-xl p-6">
-                  <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <div
+                    className="rounded-xl p-6 hover:shadow-lg"
+                    style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                  >
+                  <h2 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                     <BookOpen className="w-5 h-5 text-primary" />
                     Learning Resources
                   </h2>
@@ -146,8 +151,13 @@ export default function CategoryDetail() {
 
               <ParallaxSection speed={0.1}>
                 <ScrollReveal delay={0.1}>
-                  <div className="bg-card border border-card-border rounded-xl p-6">
-                    <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                  <div
+                      className="rounded-xl p-6 hover:shadow-lg"
+                      style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                    >
+                    <h2 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                       <Code2 className="w-5 h-5 text-secondary" />
                       Sample Projects
                     </h2>
@@ -184,16 +194,21 @@ export default function CategoryDetail() {
             <div className="space-y-6">
               <ParallaxSection speed={-0.1}>
               <ScrollReveal delay={0.2}>
-                <div className="bg-card border border-card-border rounded-xl p-6">
-                  <h3 className="font-semibold mb-4">Community Stats</h3>
+                <div
+                    className="rounded-xl p-6 hover:shadow-lg"
+                    style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                  >
+                  <h3 className="font-semibold mb-4" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Community Stats</h3>
                   {[
                     { label: "Active Members", value: category.memberCount.toLocaleString(), color: "bg-primary" },
                     { label: "Projects Shared", value: Math.floor(category.memberCount * 0.4).toLocaleString(), color: "bg-secondary" },
                     { label: "This Month", value: `+${Math.floor(category.memberCount * 0.05)}`, color: "bg-chart-3" },
                   ].map((stat, i) => (
                     <div key={i} className="flex items-center justify-between py-2 border-b border-border last:border-0">
-                      <span className="text-sm text-muted-foreground">{stat.label}</span>
-                      <span className="text-sm font-semibold">{stat.value}</span>
+                      <span className="text-sm" style={{ color: "#FFFFFF" }}>{stat.label}</span>
+                      <span className="text-sm font-semibold" style={{ color: "#FFFFFF" }}>{stat.value}</span>
                     </div>
                   ))}
                 </div>

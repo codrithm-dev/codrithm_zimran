@@ -77,10 +77,16 @@ export default function About() {
                 { number: "30+", label: "Team Members", desc: "Engineers, designers, and educators worldwide" },
                 { number: "50+", label: "Projects Shipped", desc: "From startups to enterprise solutions" },
               ].map((stat) => (
-                <div key={stat.label} className="bg-card border border-card-border rounded-xl p-6">
+                <div
+                  key={stat.label}
+                  className="rounded-xl p-6 hover:shadow-lg"
+                  style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                >
                   <div className="text-3xl font-black text-gradient mb-1">{stat.number}</div>
-                  <div className="font-semibold text-sm mb-1">{stat.label}</div>
-                  <div className="text-xs text-muted-foreground">{stat.desc}</div>
+                  <div className="font-semibold text-sm mb-1" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{stat.label}</div>
+                  <div className="text-xs" style={{ color: "#FFFFFF" }}>{stat.desc}</div>
                 </div>
               ))}
             </div>
@@ -129,16 +135,19 @@ export default function About() {
               {TEAM.map((member) => (
                 <div
                   key={member.id}
-                  className="bg-card border border-card-border rounded-xl p-6 text-center hover:-translate-y-1 transition-transform"
+                  className="rounded-xl p-6 text-center hover:-translate-y-1 hover:shadow-lg"
+                  style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
                 >
                   <img
                     src={member.avatar}
                     alt={member.name}
                     className="w-20 h-20 rounded-full mx-auto mb-4 bg-muted"
                   />
-                  <h3 className="font-semibold">{member.name}</h3>
+                  <h3 className="font-semibold" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{member.name}</h3>
                   <div className="text-xs text-primary font-medium mb-2">{member.role}</div>
-                  <p className="text-sm text-muted-foreground">{member.bio}</p>
+                  <p className="text-sm" style={{ color: "#FFFFFF" }}>{member.bio}</p>
                 </div>
               ))}
             </div>

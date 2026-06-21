@@ -54,7 +54,10 @@ export default function Projects() {
               {PROJECTS.map((project) => (
                 <div
                   key={project.id}
-                  className="bg-card border border-card-border rounded-xl p-6 h-full flex flex-col hover:-translate-y-1 transition-transform"
+                  className="rounded-xl p-6 h-full flex flex-col hover:-translate-y-1 hover:shadow-lg"
+                  style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
                 >
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
@@ -83,8 +86,8 @@ export default function Projects() {
                       )}
                     </div>
                   </div>
-                  <h3 className="font-semibold mb-2">{project.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-4 flex-1">{project.description}</p>
+                  <h3 className="font-semibold mb-2" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{project.title}</h3>
+                  <p className="text-sm mb-4 flex-1" style={{ color: "#FFFFFF" }}>{project.description}</p>
                   <div className="flex flex-wrap gap-1.5 mt-auto">
                     {project.techStack.map((tech) => (
                       <span

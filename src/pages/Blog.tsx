@@ -57,7 +57,10 @@ export default function Blog() {
               {BLOGS.map((post) => (
                 <article
                   key={post.id}
-                  className="bg-card border border-card-border rounded-xl overflow-hidden h-full flex flex-col hover:-translate-y-1 transition-transform"
+                  className="rounded-xl overflow-hidden h-full flex flex-col hover:-translate-y-1 hover:shadow-lg"
+                  style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#112240"; (e.currentTarget as HTMLElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
                 >
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center gap-2 mb-3">
@@ -65,9 +68,9 @@ export default function Blog() {
                         {post.category}
                       </span>
                     </div>
-                    <h2 className="font-semibold mb-2">{post.title}</h2>
-                    <p className="text-sm text-muted-foreground mb-4 flex-1">{post.excerpt}</p>
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <h2 className="font-semibold mb-2" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{post.title}</h2>
+                    <p className="text-sm mb-4 flex-1" style={{ color: "#FFFFFF" }}>{post.excerpt}</p>
+                    <div className="flex items-center justify-between text-xs" style={{ color: "#FFFFFF" }}>
                       <div className="flex items-center gap-3">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-3 h-3" />

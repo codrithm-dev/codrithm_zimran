@@ -33,9 +33,14 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {PRODUCTS.map((product, i) => (
                 <ScrollReveal key={product.id} delay={i * 0.1}>
-                  <div className="bg-card border border-card-border rounded-xl p-6 h-full">
+                  <div
+                      className="rounded-xl p-6 h-full hover:shadow-lg"
+                      style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                    >
                     <div className="flex items-center gap-2 mb-3">
-                      <h3 className="font-semibold">{product.name}</h3>
+                      <h3 className="font-semibold" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{product.name}</h3>
                       <span
                         className={`text-xs px-2 py-0.5 rounded-full font-medium ${
                           product.status === "live"
@@ -48,10 +53,10 @@ export default function Home() {
                         {product.status}
                       </span>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-4">{product.description}</p>
+                    <p className="text-sm mb-4" style={{ color: "#FFFFFF" }}>{product.description}</p>
                     <ul className="space-y-1">
                       {product.features.slice(0, 3).map((f) => (
-                        <li key={f} className="text-xs text-muted-foreground flex items-center gap-1.5">
+                        <li key={f} className="text-xs flex items-center gap-1.5" style={{ color: "#FFFFFF" }}>
                           <div className="w-1 h-1 rounded-full bg-primary/50" />
                           {f}
                         </li>
