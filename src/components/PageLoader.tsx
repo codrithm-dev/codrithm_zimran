@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { Code2 } from "lucide-react";
 
 export function PageLoader() {
   const [isVisible, setIsVisible] = useState(true);
@@ -100,9 +99,17 @@ export function PageLoader() {
       />
 
       {/* Logo icon */}
-      <div ref={logoRef} className="relative z-10 mb-6">
-        <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/30">
-          <Code2 className="w-8 h-8 text-primary-foreground" />
+      <div ref={logoRef} className="relative z-10 mb-6 flex items-center justify-center">
+        <div
+          className="flex items-center justify-center shadow-lg"
+          style={{ width: "60vw", height: "60vh", background: "transparent" }}
+        >
+          <img
+            src="/assets/codrithm-logo.svg"
+            alt="Codrithm"
+            className="w-full h-full"
+            style={{ objectFit: "contain" }}
+          />
         </div>
       </div>
 

@@ -75,9 +75,19 @@ export function Hero() {
             ref={headingRef}
             className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] mb-6"
           >
-            <span className="text-gradient">Engineering</span>{" "}
-            the Future of{" "}
-            <span className="text-gradient">Technology</span>
+            <span
+              style={{
+                display: "block",
+                background: "linear-gradient(to right, #2B64D9, #8BECAE)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Where Coders Make History
+            </span>
+            <span style={{ display: "block", color: "#FFFFFF" }}>
+              coding the logic, crafting the flow
+            </span>
           </h1>
 
           <p
