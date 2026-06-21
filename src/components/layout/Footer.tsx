@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Link } from "wouter";
-import { Github, Twitter, Linkedin } from "lucide-react";
+import { Github, Twitter, Linkedin } from "@/components/icons";
 import { Logo } from "@/components/branding/Logo";
 import { gsap, useGSAP } from "@/lib/gsap";
 
@@ -69,7 +69,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1 footer-col">
             <div className="mb-3">
-              <Logo size="sm" />
+              <Logo size="sm" heightPx={48} />
             </div>
             <p className="text-sm text-muted-foreground max-w-xs mb-4">
               Engineering the future of technology through enterprise solutions and developer education.

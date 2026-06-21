@@ -1,11 +1,12 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Code2 } from "lucide-react";
 
 interface LogoProps {
   size?: "sm" | "md" | "lg";
   showText?: boolean;
   href?: string;
+  /** If provided, forces logo height in pixels */
+  heightPx?: number;
 }
 
 const sizes = {
@@ -14,8 +15,11 @@ const sizes = {
   lg: { icon: "w-10 h-10", iconInner: "w-5 h-5", text: "text-xl" },
 };
 
-export function Logo({ size = "md", showText = true, href = "/" }: LogoProps) {
+export function Logo({ size = "md", showText = true, href = "/", heightPx }: LogoProps) {
   const s = sizes[size];
+  const imgStyle: React.CSSProperties = heightPx
+    ? { height: `${heightPx}px`, width: "auto" }
+    : { height: "1em", width: "auto" };
 
   return (
     <Link href={href}>
@@ -24,11 +28,21 @@ export function Logo({ size = "md", showText = true, href = "/" }: LogoProps) {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.97 }}
       >
-        <div className={`${s.icon} rounded-lg bg-primary flex items-center justify-center`}>
-          <Code2 className={`${s.iconInner} text-primary-foreground`} />
+        <div className="inline-flex items-center justify-center rounded-lg">
+          <img
+            src="/assets/codrithm-logo.svg"
+            alt="Codrithm"
+            className="object-contain"
+            style={imgStyle}
+          />
         </div>
         {showText && (
-          <span className={`font-bold ${s.text} text-gradient`}>Codrithm</span>
+          <span
+            className={`font-bold ${s.text}`}
+            style={{ fontFamily: "'Comfortaa', cursive", fontWeight: 700, color: "#2B64D9" }}
+          >
+            Codrithm
+          </span>
         )}
       </motion.div>
     </Link>

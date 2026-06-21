@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/MagneticButton";
 import { FloatingParticles } from "@/components/FloatingParticles";
 import { HeroStatCounter } from "@/components/HeroStatCounter";
+import SoftAurora from "@/components/SoftAurora";
+import { useTheme } from "@/components/theme-provider";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 export function Hero() {
@@ -14,8 +16,8 @@ export function Hero() {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
-  const blobLeftRef = useRef<HTMLDivElement>(null);
-  const blobRightRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
+  const isDark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   useGSAP(
     () => {
@@ -26,28 +28,6 @@ export function Hero() {
         .from(subtitleRef.current, { opacity: 0, y: 30, duration: 0.5 }, "-=0.3")
         .from(buttonsRef.current, { opacity: 0, y: 20, duration: 0.5 }, "-=0.2")
         .from(statsRef.current, { opacity: 0, y: 20, duration: 0.5 }, "-=0.2");
-
-      // Floating blob animation
-      if (blobLeftRef.current) {
-        gsap.to(blobLeftRef.current, {
-          y: 30,
-          x: 15,
-          duration: 4,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-      }
-      if (blobRightRef.current) {
-        gsap.to(blobRightRef.current, {
-          y: -25,
-          x: -20,
-          duration: 5,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-      }
     },
     { scope: containerRef },
   );
@@ -56,11 +36,21 @@ export function Hero() {
     <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-20" />
 
+      {/* Aurora background */}
+      <div className="absolute inset-0">
+        <SoftAurora
+          speed={0.4}
+          scale={1.8}
+          brightness={isDark ? 0.6 : 0.35}
+          color1={isDark ? "#7C3AED" : "#9F67FF"}
+          color2={isDark ? "#00E5FF" : "#00B8D4"}
+          bandHeight={0.45}
+          bandSpread={1.2}
+        />
+      </div>
+
       {/* Floating particles */}
       <FloatingParticles count={35} />
-
-      <div ref={blobLeftRef} className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div ref={blobRightRef} className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-3xl">
@@ -75,9 +65,21 @@ export function Hero() {
             ref={headingRef}
             className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] mb-6"
           >
-            <span className="text-gradient">Engineering</span>{" "}
-            the Future of{" "}
-            <span className="text-gradient">Technology</span>
+            <span
+              style={{
+                display: "block",
+                background: isDark
+                  ? "linear-gradient(to right, #7C3AED, #00E5FF)"
+                  : "linear-gradient(to right, #5B21B6, #0891B2)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Where Coders Make History
+            </span>
+            <span style={{ display: "block", color: isDark ? "#FFFFFF" : "#1a1a2e" }}>
+              coding the logic, crafting the flow
+            </span>
           </h1>
 
           <p

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin } from "@/components/icons";
 import { GsapTextReveal } from "@/components/gsap/GsapTextReveal";
 import { GsapReveal } from "@/components/gsap/GsapReveal";
 
