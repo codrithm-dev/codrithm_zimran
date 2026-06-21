@@ -36,18 +36,32 @@ export function Hero() {
     <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-20" />
 
-      {/* Aurora background */}
-      <div className="absolute inset-0">
+      {/* Aurora background with WebGL */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <SoftAurora
           speed={0.4}
           scale={1.8}
-          brightness={isDark ? 0.6 : 0.35}
+          brightness={isDark ? 0.5 : 0.3}
           color1={isDark ? "#7C3AED" : "#9F67FF"}
           color2={isDark ? "#00E5FF" : "#00B8D4"}
           bandHeight={0.45}
           bandSpread={1.2}
+          noiseFrequency={2.2}
+          noiseAmplitude={0.8}
+          octaveDecay={0.12}
+          className="opacity-80"
         />
       </div>
+
+      {/* Gradient overlay for better blending */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: isDark
+            ? "radial-gradient(ellipse 100% 60% at 50% 0%, transparent 0%, rgba(10,10,20,0.4) 60%, rgba(10,10,20,0.8) 100%)"
+            : "radial-gradient(ellipse 100% 60% at 50% 0%, transparent 0%, rgba(255,255,255,0.3) 60%, rgba(255,255,255,0.7) 100%)",
+        }}
+      />
 
       {/* Floating particles */}
       <FloatingParticles count={35} />

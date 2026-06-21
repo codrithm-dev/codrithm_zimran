@@ -30,7 +30,7 @@ export function Logo({ size = "md", showText = true, href = "/", heightPx }: Log
       >
         <div className="inline-flex items-center justify-center rounded-lg">
           <img
-            src="/assets/codrithm-logo.svg"
+            src="/codrithm-logo.svg"
             alt="Codrithm"
             className="object-contain"
             style={imgStyle}
