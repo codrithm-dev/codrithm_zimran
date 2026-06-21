@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { useTheme } from "@/components/theme-provider";
 
 interface LogoProps {
   size?: "sm" | "md" | "lg";
@@ -17,6 +18,9 @@ const sizes = {
 
 export function Logo({ size = "md", showText = true, href = "/", heightPx }: LogoProps) {
   const s = sizes[size];
+  const { theme } = useTheme();
+  const isDark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+
   const imgStyle: React.CSSProperties = heightPx
     ? { height: `${heightPx}px`, width: "auto" }
     : { height: "1em", width: "auto" };
@@ -39,7 +43,11 @@ export function Logo({ size = "md", showText = true, href = "/", heightPx }: Log
         {showText && (
           <span
             className={`font-bold ${s.text}`}
-            style={{ fontFamily: "'Comfortaa', cursive", fontWeight: 700, color: "#2B64D9" }}
+            style={{
+              fontFamily: "'Comfortaa', cursive",
+              fontWeight: 700,
+              color: isDark ? "#fff" : "#1a1a2e",
+            }}
           >
             Codrithm
           </span>

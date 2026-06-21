@@ -10,7 +10,6 @@ import { OurTeam } from "@/components/sections/OurTeam";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { MagneticButton } from "@/components/MagneticButton";
-import { GradientPulse } from "@/components/GradientPulse";
 import { CardTilt } from "@/components/CardTilt";
 import { GsapTextReveal } from "@/components/gsap/GsapTextReveal";
 import { GsapReveal } from "@/components/gsap/GsapReveal";
@@ -123,38 +122,39 @@ export default function Home() {
       <section className="py-20 bg-muted/20 relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
-            <GradientPulse>
-              <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 rounded-2xl p-12">
-                <ScrollReveal>
-                  <h2 className="text-4xl font-black mb-4">
-                    Ready to <span className="text-gradient">build something?</span>
-                  </h2>
-                </ScrollReveal>
-                <ScrollReveal delay={0.1}>
-                  <p className="text-muted-foreground mb-8 text-lg">
-                    Whether you need a software partner or want to join our learning community.
-                  </p>
-                </ScrollReveal>
-                <ScrollReveal delay={0.2}>
-                  <div className="flex flex-wrap gap-3 justify-center">
-                    <MagneticButton pullDistance={12}>
-                      <a href="#contact">
-                        <Button size="lg" className="glow-primary text-base px-8 cursor-pointer">
-                          Start a Project <ArrowRight className="w-4 h-4 ml-2" />
-                        </Button>
-                      </a>
-                    </MagneticButton>
-                    <MagneticButton pullDistance={12}>
-                      <a href="#about">
-                        <Button size="lg" variant="outline" className="text-base px-8 cursor-pointer">
-                          Learn About Us
-                        </Button>
-                      </a>
-                    </MagneticButton>
-                  </div>
-                </ScrollReveal>
-              </div>
-            </GradientPulse>
+            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 rounded-2xl p-12">
+              <ScrollReveal>
+                <h2 className="text-4xl font-black mb-4">
+                  Ready to <span className="text-gradient">build something?</span>
+                </h2>
+              </ScrollReveal>
+              <ScrollReveal delay={0.1}>
+                <p className="text-muted-foreground mb-8 text-lg">
+                  Whether you need a software partner or want to join our learning community.
+                </p>
+              </ScrollReveal>
+              <ScrollReveal delay={0.2}>
+                <div className="flex flex-wrap gap-3 justify-center">
+                  <MagneticButton pullDistance={12}>
+                    <a href="#contact">
+                      <Button
+                        size="lg"
+                        className="glow-primary text-base px-8 cursor-pointer font-semibold"
+                      >
+                        Start a Project <ArrowRight className="w-4 h-4 ml-2" />
+                      </Button>
+                    </a>
+                  </MagneticButton>
+                  <MagneticButton pullDistance={12}>
+                    <a href="#about">
+                      <Button size="lg" variant="outline" className="text-base px-8 cursor-pointer">
+                        Learn About Us
+                      </Button>
+                    </a>
+                  </MagneticButton>
+                </div>
+              </ScrollReveal>
+            </div>
           </ScrollReveal>
         </div>
       </section>
