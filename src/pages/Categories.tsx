@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search } from "lucide-react";
-import { Navbar } from "@/components/Navbar";
+import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/Footer";
 import { CategoryCard } from "@/components/CategoryCard";
 import { PageTransition } from "@/components/PageTransition";

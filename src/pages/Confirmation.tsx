@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Navbar } from "@/components/Navbar";
+import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/Footer";
 
 function Confetti() {
