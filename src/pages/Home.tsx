@@ -173,7 +173,7 @@ export default function Home() {
             </p>
           </GsapReveal>
 
-          <div ref={aboutStatsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div ref={aboutStatsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { number: "2023", label: "Founded", desc: "Started with a vision to transform tech education" },
               { number: "30+", label: "Team Members", desc: "Engineers, designers, and educators worldwide" },
@@ -185,41 +185,6 @@ export default function Home() {
                 <div className="text-xs text-muted-foreground">{stat.desc}</div>
               </div>
             ))}
-          </div>
-
-          <GsapTextReveal as="h3" className="text-2xl font-bold mb-3 text-center">
-            Our Mission
-          </GsapTextReveal>
-          <div className="max-w-3xl mx-auto text-center">
-            <GsapReveal delay={0.1}>
-              <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                Codrithm was founded on the belief that every student developer deserves access to
-                real-world engineering experience. We combine enterprise software development with
-                community-driven learning to create a platform where students don't just learn to
-                code — they learn to build products that matter.
-              </p>
-            </GsapReveal>
-            <GsapReveal delay={0.25}>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                Our dual focus on delivering professional software solutions and nurturing talent
-                means our students work on real projects, solve real problems, and graduate with
-                portfolios that stand out.
-              </p>
-            </GsapReveal>
-            <GsapReveal delay={0.4}>
-              <div className="flex flex-wrap justify-center gap-6 mt-10">
-                {[
-                  { label: "Real Projects", desc: "Production-grade work from day one" },
-                  { label: "Expert Mentors", desc: "Guided by industry professionals" },
-                  { label: "Community First", desc: "Learn better, build together" },
-                ].map((item) => (
-                  <div key={item.label} className="bg-card border border-card-border rounded-xl px-6 py-4 text-left min-w-[160px]">
-                    <div className="text-sm font-semibold text-primary mb-1">{item.label}</div>
-                    <div className="text-xs text-muted-foreground">{item.desc}</div>
-                  </div>
-                ))}
-              </div>
-            </GsapReveal>
           </div>
         </div>
       </section>
