@@ -1,19 +1,16 @@
-import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "wouter";
-import { Moon, Sun, Menu, X, ChevronDown } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { Moon, Sun, Menu, X, ArrowRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTheme } from "@/components/theme-provider";
-import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/branding/Logo";
 
 const navLinks = [
-  { href: "/", label: "Home", icon: "home" },
-  { href: "/about", label: "About", icon: "info" },
-  { href: "/services", label: "Services", icon: "briefcase" },
-  { href: "/products", label: "Products", icon: "package" },
-  { href: "/blog", label: "Blog", icon: "filetext" },
-  { href: "/team", label: "Team", icon: "users" },
-  { href: "/contact", label: "Contact", icon: "mail" },
+  { href: "#home", label: "Home", icon: "home" },
+  { href: "#services", label: "Services", icon: "briefcase" },
+  { href: "#projects", label: "Projects", icon: "package" },
+  { href: "#team", label: "Team", icon: "users" },
+  { href: "#contact", label: "Contact", icon: "mail" },
+  { href: "#about", label: "About", icon: "info" },
 ];
 
 function NavIcon({ name, className }: { name: string; className?: string }) {
@@ -82,83 +79,101 @@ function NavIcon({ name, className }: { name: string; className?: string }) {
 }
 
 export function Navbar() {
-  const [location] = useLocation();
   const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("#home");
   const navRef = useRef<HTMLElement>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
 
+  const scrollTo = useCallback((href: string) => {
+    const el = document.querySelector(href);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+
+      const sections = navLinks.map((l) => l.href.replace("#", ""));
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.getBoundingClientRect().top <= 120) {
+          setActiveSection(`#${sections[i]}`);
+          break;
+        }
+      }
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     if (!linksRef.current || !indicatorRef.current) return;
-
     const container = linksRef.current;
-    const activeEl = container.querySelector(`[data-href="${location}"]`) as HTMLElement;
-
+    const activeEl = container.querySelector(`[data-href="${activeSection}"]`) as HTMLElement;
     if (activeEl) {
       const containerRect = container.getBoundingClientRect();
       const linkRect = activeEl.getBoundingClientRect();
-
       indicatorRef.current.style.left = `${linkRect.left - containerRect.left}px`;
       indicatorRef.current.style.width = `${linkRect.width}px`;
       indicatorRef.current.style.opacity = "1";
     } else {
       indicatorRef.current.style.opacity = "0";
     }
-  }, [location]);
+  }, [activeSection]);
 
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+
+  const pillStyle = {
+    background: scrolled
+      ? "rgba(10, 10, 20, 0.88)"
+      : "rgba(10, 10, 20, 0.70)",
+    backdropFilter: "blur(16px) saturate(180%)",
+    WebkitBackdropFilter: "blur(16px) saturate(180%)",
+    border: "1px solid rgba(255,255,255,0.12)",
+    boxShadow: scrolled
+      ? "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08)"
+      : "0 4px 20px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06)",
+    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+    minHeight: "44px",
+  };
 
   return (
     <>
       <style>{`
         @keyframes navbarSlideIn {
-          from {
-            opacity: 0;
-            transform: translateY(-12px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(-12px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes ctaGlow {
+          0%, 100% { box-shadow: 0 0 20px rgba(124,58,237,0.4), 0 0 40px rgba(124,58,237,0.1); }
+          50% { box-shadow: 0 0 30px rgba(124,58,237,0.6), 0 0 60px rgba(124,58,237,0.2); }
         }
       `}</style>
 
       <nav
         ref={navRef}
-        className="fixed top-3 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[95vw]"
+        className="fixed top-3 left-0 right-0 z-50 flex items-center justify-center gap-3 px-4 lg:px-8"
         style={{ animation: "navbarSlideIn 0.5s ease-out forwards" }}
       >
-        {/* Desktop floating pill */}
+        {/* Desktop: pill nav */}
         <div
           className="hidden lg:flex items-center gap-1 rounded-full px-2.5 py-2"
-          style={{
-            background: scrolled
-              ? "rgba(10, 10, 20, 0.88)"
-              : "rgba(10, 10, 20, 0.70)",
-            backdropFilter: "blur(16px) saturate(180%)",
-            WebkitBackdropFilter: "blur(16px) saturate(180%)",
-            border: "1px solid rgba(255,255,255,0.12)",
-            boxShadow: scrolled
-              ? "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08)"
-              : "0 4px 20px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06)",
-            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-            minHeight: "44px",
-          }}
+          style={pillStyle}
         >
-          {/* Logo with background circle for visibility */}
-          <Link href="/" className="flex items-center pr-3 pl-2 border-r border-white/10 mr-1 h-full">
+          {/* Logo */}
+          <button
+            onClick={() => scrollTo("#home")}
+            className="flex items-center pr-3 pl-2 border-r border-white/10 mr-1 h-full cursor-pointer"
+          >
             <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/95 backdrop-blur-sm shadow-sm">
               <Logo heightPx={20} showText={false} />
             </div>
-          </Link>
+          </button>
 
           {/* Nav links with sliding indicator */}
           <div ref={linksRef} className="relative flex items-center h-full gap-0.5">
@@ -175,44 +190,77 @@ export function Navbar() {
             />
 
             {navLinks.map((link) => {
-              const isActive = location === link.href;
+              const isActive = activeSection === link.href;
               return (
-                <Link key={link.href} href={link.href}>
-                  <span
-                    data-href={link.href}
-                    className={`relative z-10 flex flex-col items-center justify-center gap-[3px] px-3.5 py-1.5 rounded-full cursor-pointer transition-all duration-200 h-full ${
-                      isActive ? "text-white" : "text-white/60 hover:text-white/85"
-                    }`}
-                  >
-                    <NavIcon name={link.icon} />
-                    <span className="text-[8.5px] font-semibold leading-none tracking-wider uppercase">{link.label}</span>
-                  </span>
-                </Link>
+                <button
+                  key={link.href}
+                  data-href={link.href}
+                  onClick={() => scrollTo(link.href)}
+                  className={`relative z-10 flex flex-col items-center justify-center gap-[3px] px-3.5 py-1.5 rounded-full cursor-pointer transition-all duration-200 h-full border-0 bg-transparent ${
+                    isActive ? "text-white" : "text-white/60 hover:text-white/85"
+                  }`}
+                >
+                  <NavIcon name={link.icon} />
+                  <span className="text-[8.5px] font-semibold leading-none tracking-wider uppercase">{link.label}</span>
+                </button>
               );
             })}
           </div>
-
-          {/* Theme toggle */}
-          <button
-            onClick={toggleTheme}
-            className="flex items-center justify-center w-9 h-9 rounded-full text-white/60 hover:text-white/90 hover:bg-white/5 transition-all duration-200 ml-1"
-          >
-            <AnimatePresence mode="wait">
-              {theme === "dark" ? (
-                <motion.div key="sun" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                  <Sun className="w-[16px] h-[16px]" />
-                </motion.div>
-              ) : (
-                <motion.div key="moon" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                  <Moon className="w-[16px] h-[16px]" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </button>
         </div>
 
+        {/* Get in Touch CTA — separate from the pill, on the right */}
+        <button
+          onClick={() => scrollTo("#contact")}
+          className="hidden lg:flex items-center gap-1.5 px-5 py-2.5 rounded-full text-white text-xs font-semibold cursor-pointer border-0 overflow-hidden group"
+          style={{
+            background: "linear-gradient(135deg, #7C3AED, #6366F1)",
+            animation: "ctaGlow 3s ease-in-out infinite",
+            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            flexShrink: 0,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.05)";
+            e.currentTarget.style.animation = "ctaGlow 1.5s ease-in-out infinite";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+            e.currentTarget.style.animation = "ctaGlow 3s ease-in-out infinite";
+          }}
+        >
+          <span className="relative z-10 flex items-center gap-1.5">
+            Get in Touch
+            <motion.span
+              className="inline-block"
+              animate={{ x: [0, 3, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ArrowRight className="w-3 h-3" />
+            </motion.span>
+          </span>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+        </button>
+
+        {/* Theme toggle — separate from the pill, far right */}
+        <button
+          onClick={toggleTheme}
+          className="hidden lg:flex items-center justify-center w-9 h-9 rounded-full text-white/60 hover:text-white/90 hover:bg-white/5 transition-all duration-200"
+          style={pillStyle}
+        >
+          <AnimatePresence mode="wait">
+            {theme === "dark" ? (
+              <motion.div key="sun" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                <Sun className="w-[16px] h-[16px]" />
+              </motion.div>
+            ) : (
+              <motion.div key="moon" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                <Moon className="w-[16px] h-[16px]" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </button>
+
         {/* Mobile layout */}
-        <div className="lg:hidden mx-4">
+        <div className="lg:hidden w-full max-w-lg">
           <div
             className="flex items-center justify-between rounded-xl px-4 py-2.5"
             style={{
@@ -224,13 +272,33 @@ export function Navbar() {
               minHeight: "52px",
             }}
           >
-            <Link href="/" className="flex items-center">
+            <button
+              onClick={() => scrollTo("#home")}
+              className="flex items-center cursor-pointer bg-transparent border-0 p-0"
+            >
               <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/95 backdrop-blur-sm shadow-sm">
                 <Logo heightPx={22} showText={false} />
               </div>
-            </Link>
+            </button>
 
             <div className="flex items-center gap-2.5">
+              {/* Mobile CTA button */}
+              <motion.button
+                onClick={() => {
+                  scrollTo("#contact");
+                  setIsOpen(false);
+                }}
+                className="flex items-center gap-1 px-3 py-1.5 rounded-full text-white text-xs font-semibold cursor-pointer border-0"
+                style={{
+                  background: "linear-gradient(135deg, #7C3AED, #6366F1)",
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Get in Touch
+                <ArrowRight className="w-3 h-3" />
+              </motion.button>
+
               <button
                 onClick={toggleTheme}
                 className="w-9 h-9 flex items-center justify-center rounded-full text-white/60 hover:text-white/90 hover:bg-white/5 transition-all"
@@ -265,32 +333,37 @@ export function Navbar() {
               >
                 <div className="px-3 py-3 flex flex-col gap-1">
                   {navLinks.map((link) => {
-                    const isActive = location === link.href;
+                    const isActive = activeSection === link.href;
                     return (
-                      <Link key={link.href} href={link.href}>
-                        <span
-                          onClick={() => setIsOpen(false)}
-                          className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
-                            isActive
-                              ? "bg-primary/20 text-primary border border-primary/20"
-                              : "text-white/60 hover:text-white hover:bg-white/6"
-                          }`}
-                        >
-                          <NavIcon name={link.icon} />
-                          {link.label}
-                        </span>
-                      </Link>
+                      <button
+                        key={link.href}
+                        onClick={() => {
+                          scrollTo(link.href);
+                          setIsOpen(false);
+                        }}
+                        className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer border-0 text-left ${
+                          isActive
+                            ? "bg-primary/20 text-primary border border-primary/20"
+                            : "text-white/60 hover:text-white hover:bg-white/6 bg-transparent"
+                        }`}
+                      >
+                        <NavIcon name={link.icon} />
+                        {link.label}
+                      </button>
                     );
                   })}
-                  <Link href="/login">
-                    <Button
-                      size="sm"
-                      className="w-full mt-2"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Sign In
-                    </Button>
-                  </Link>
+                  <button
+                    onClick={() => {
+                      scrollTo("#contact");
+                      setIsOpen(false);
+                    }}
+                    className="w-full mt-2 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white cursor-pointer border-0"
+                    style={{
+                      background: "linear-gradient(135deg, #7C3AED, #6366F1)",
+                    }}
+                  >
+                    Get in Touch <ArrowRight className="w-4 h-4" />
+                  </button>
                 </div>
               </motion.div>
             )}

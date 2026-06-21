@@ -1,27 +1,24 @@
 import { useRef } from "react";
-import { Link } from "wouter";
 import { Github, Twitter, Linkedin } from "@/components/icons";
 import { Logo } from "@/components/branding/Logo";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 const footerLinks = {
   Company: [
-    { href: "/about", label: "About" },
-    { href: "/team", label: "Team" },
-    { href: "/blog", label: "Blog" },
-    { href: "/contact", label: "Contact" },
+    { href: "#about", label: "About" },
+    { href: "#team", label: "Team" },
+    { href: "#contact", label: "Contact" },
   ],
   Services: [
-    { href: "/services", label: "Web Development" },
-    { href: "/services", label: "Cloud Solutions" },
-    { href: "/services", label: "AI & ML" },
-    { href: "/services", label: "Mobile Development" },
+    { href: "#services", label: "Web Development" },
+    { href: "#services", label: "Cloud Solutions" },
+    { href: "#services", label: "AI & ML" },
+    { href: "#services", label: "Mobile Development" },
   ],
-  Products: [
-    { href: "/products", label: "Codrithm Learn" },
-    { href: "/products", label: "Codrithm Connect" },
-    { href: "/products", label: "Codrithm Deploy" },
-    { href: "/products", label: "Codrithm AI" },
+  Projects: [
+    { href: "#projects", label: "Open Source" },
+    { href: "#projects", label: "Community" },
+    { href: "#projects", label: "Enterprise" },
   ],
 };
 
@@ -93,11 +90,11 @@ export function Footer() {
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href}>
+                    <a href={link.href}>
                       <span className="text-sm text-muted-foreground hover:text-foreground cursor-pointer transition-colors">
                         {link.label}
                       </span>
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>

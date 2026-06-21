@@ -5,11 +5,16 @@
 }
 
 .soft-aurora-container canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  display: block;
-  mix-blend-mode: screen;
+  display: block !important;
+  mix-blend-mode: screen !important;
+}
+
+.light .soft-aurora-container canvas {
+  mix-blend-mode: normal !important;
+  opacity: 0.35 !important;
 }

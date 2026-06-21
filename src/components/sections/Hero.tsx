@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { Link } from "wouter";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/MagneticButton";
@@ -33,15 +32,16 @@ export function Hero() {
   );
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden">
+    <section id="home" ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden pt-20">
       <div className="absolute inset-0 grid-bg opacity-20" />
 
-      {/* Aurora background with WebGL */}
+      {/* Aurora background with WebGL — key forces remount on theme change */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <SoftAurora
+          key={theme}
           speed={0.4}
           scale={1.8}
-          brightness={isDark ? 0.5 : 0.3}
+          brightness={isDark ? 0.5 : 0.15}
           color1={isDark ? "#7C3AED" : "#9F67FF"}
           color2={isDark ? "#00E5FF" : "#00B8D4"}
           bandHeight={0.45}
@@ -49,17 +49,17 @@ export function Hero() {
           noiseFrequency={2.2}
           noiseAmplitude={0.8}
           octaveDecay={0.12}
-          className="opacity-80"
+          className={isDark ? "opacity-80" : "opacity-40"}
         />
       </div>
 
       {/* Gradient overlay for better blending */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background: isDark
             ? "radial-gradient(ellipse 100% 60% at 50% 0%, transparent 0%, rgba(10,10,20,0.4) 60%, rgba(10,10,20,0.8) 100%)"
-            : "radial-gradient(ellipse 100% 60% at 50% 0%, transparent 0%, rgba(255,255,255,0.3) 60%, rgba(255,255,255,0.7) 100%)",
+            : "radial-gradient(ellipse 100% 60% at 50% 0%, transparent 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.95) 100%)",
         }}
       />
 
@@ -106,18 +106,18 @@ export function Hero() {
 
           <div ref={buttonsRef} className="flex flex-wrap gap-3">
             <MagneticButton pullDistance={10}>
-              <Link href="/contact">
+              <a href="#contact">
                 <Button size="lg" className="glow-primary text-base px-6 cursor-pointer">
                   Get in Touch <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
-              </Link>
+              </a>
             </MagneticButton>
             <MagneticButton pullDistance={10}>
-              <Link href="/services">
+              <a href="#services">
                 <Button size="lg" variant="outline" className="text-base px-6 cursor-pointer">
                   Our Services
                 </Button>
-              </Link>
+              </a>
             </MagneticButton>
           </div>
 
