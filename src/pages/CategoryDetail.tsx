@@ -215,8 +215,8 @@ export default function CategoryDetail() {
                     { label: "This Month", value: `+${Math.floor(category.memberCount * 0.05)}`, color: "bg-chart-3" },
                   ].map((stat, i) => (
                     <div key={i} className="flex items-center justify-between py-2 border-b border-border last:border-0">
-                      <span className="text-sm" style={{ color: "#FFFFFF" }}>{stat.label}</span>
-                      <span className="text-sm font-semibold" style={{ color: "#FFFFFF" }}>{stat.value}</span>
+                      <span className="text-sm" style={{ color: cardText }}>{stat.label}</span>
+                      <span className="text-sm font-semibold" style={{ color: cardText }}>{stat.value}</span>
                     </div>
                   ))}
                 </div>

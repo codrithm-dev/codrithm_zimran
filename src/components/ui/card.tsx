@@ -61,13 +61,18 @@ CardTitle.displayName = "CardTitle"
 const CardDescription = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, style, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("text-sm", className)}
-    style={{ color: "#FFFFFF", ...style }}
-    {...props}
-  />
+>(({ className, style, ...props }, ref) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  return (
+    <div
+      ref={ref}
+      className={cn("text-sm", className)}
+      style={{ color: isDark ? '#FFFFFF' : '#0A0F1E', ...style }}
+      {...props}
+    />
+  );
+})
 ))
 CardDescription.displayName = "CardDescription"
 

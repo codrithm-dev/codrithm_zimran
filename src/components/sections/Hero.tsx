@@ -6,6 +6,7 @@ import { MagneticButton } from "@/components/MagneticButton";
 import { FloatingParticles } from "@/components/FloatingParticles";
 import { HeroStatCounter } from "@/components/HeroStatCounter";
 import { gsap, useGSAP } from "@/lib/gsap";
+import { useTheme } from "@/components/theme-provider";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -16,6 +17,8 @@ export function Hero() {
   const statsRef = useRef<HTMLDivElement>(null);
   const blobLeftRef = useRef<HTMLDivElement>(null);
   const blobRightRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   useGSAP(
     () => {
@@ -65,7 +68,7 @@ export function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-3xl">
           <div ref={badgeRef} className="flex items-center gap-2 mb-6">
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs text-white font-medium">
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-medium" style={{ color: isDark ? '#FFFFFF' : '#0A0F1E' }}>
               <Sparkles className="w-3 h-3" />
               Software Solutions & Tech Education
             </div>
@@ -85,7 +88,7 @@ export function Hero() {
             >
               Where Coders Make History
             </span>
-            <span style={{ display: "block", color: "#FFFFFF" }}>
+            <span style={{ display: "block", color: isDark ? '#FFFFFF' : '#0A0F1E' }}>
               coding the logic, crafting the flow
             </span>
           </h1>
