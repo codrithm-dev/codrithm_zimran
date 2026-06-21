@@ -187,7 +187,13 @@
     @apply border-border;
   }
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased text-foreground;
+    background: radial-gradient(ellipse at top, #0D1B2A 0%, #0A0F1E 60%);
+    min-height: 100vh;
+  }
+
+  .light body, body.light {
+    background: radial-gradient(ellipse at top, #EEF4FF 0%, #F5F8FF 60%);
   }
 }
 
