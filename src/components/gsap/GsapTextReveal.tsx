@@ -1,8 +1,8 @@
-import { useRef, type ElementType } from "react";
+import React, { useRef, type ElementType } from "react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 interface GsapTextRevealProps {
-  children: string;
+  children: React.ReactNode;
   as?: ElementType;
   split?: "chars" | "words";
   stagger?: number;

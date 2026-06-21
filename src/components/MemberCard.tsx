@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin } from "@/components/icons";
 import type { TeamMember } from "@/data/team";
 
 interface MemberCardProps {
@@ -28,14 +28,14 @@ export function MemberCard({ member, delay = 0 }: MemberCardProps) {
       <h3 className="font-bold text-base mb-1 group-hover:text-primary transition-colors">
         {member.name}
       </h3>
-      <p className="text-sm text-primary font-medium mb-2">{member.position}</p>
+      <p className="text-sm text-primary font-medium mb-2">{member.role}</p>
       <p className="text-xs text-muted-foreground leading-relaxed mb-4 line-clamp-3">
         {member.bio}
       </p>
       <div className="flex justify-center gap-3">
-        {member.linkedin && (
+        {member.social?.linkedin && (
           <a
-            href={member.linkedin}
+            href={member.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="w-8 h-8 rounded-lg bg-muted/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
@@ -43,9 +43,9 @@ export function MemberCard({ member, delay = 0 }: MemberCardProps) {
             <Linkedin className="w-3.5 h-3.5" />
           </a>
         )}
-        {member.github && (
+        {member.social?.github && (
           <a
-            href={member.github}
+            href={member.social.github}
             target="_blank"
             rel="noopener noreferrer"
             className="w-8 h-8 rounded-lg bg-muted/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"

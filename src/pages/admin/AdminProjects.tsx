@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, XCircle, Star, ExternalLink, Github, Eye } from "lucide-react";
+import { CheckCircle2, XCircle, Star, ExternalLink, Eye } from "lucide-react";
+import { Github } from "@/components/icons";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { AdminSidebar } from "@/components/AdminSidebar";
