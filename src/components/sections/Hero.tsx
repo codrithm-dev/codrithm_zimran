@@ -7,6 +7,7 @@ import { FloatingParticles } from "@/components/FloatingParticles";
 import { HeroStatCounter } from "@/components/HeroStatCounter";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { useTheme } from "@/components/theme-provider";
+import { useMintStyle } from "@/components/MintButton";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,6 +20,7 @@ export function Hero() {
   const blobRightRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
   const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const mintStyle = useMintStyle();
 
   useGSAP(
     () => {
@@ -111,7 +113,7 @@ export function Hero() {
             </MagneticButton>
             <MagneticButton pullDistance={10}>
               <Link href="/services">
-                <Button size="lg" variant="outline" className="text-base px-6 cursor-pointer">
+                <Button size="lg" variant="outline" className="text-base px-6 cursor-pointer" {...mintStyle}>
                   Our Services
                 </Button>
               </Link>

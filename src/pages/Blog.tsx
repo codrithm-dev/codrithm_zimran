@@ -10,6 +10,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { GsapTextReveal } from "@/components/gsap/GsapTextReveal";
 import { GsapReveal } from "@/components/gsap/GsapReveal";
 import { useTheme } from '@/components/theme-provider';
+import { useMintStyle } from "@/components/MintButton";
 
 export default function Blog() {
   const gridRef = useRef<HTMLDivElement>(null);
@@ -20,6 +21,7 @@ export default function Blog() {
   const cardBorder = isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)';
   const cardBorderHover = isDark ? '1px solid rgba(43,100,217,0.6)' : '1px solid rgba(43,100,217,0.7)';
   const cardText = isDark ? '#FFFFFF' : '#1a2a4a';
+  const mintStyle = useMintStyle();
 
   useGSAP(
     () => {
@@ -113,7 +115,7 @@ export default function Blog() {
                   We welcome guest posts from developers and educators. Share your knowledge with our community.
                 </p>
                 <MagneticButton pullDistance={10}>
-                  <Button variant="outline">
+                  <Button variant="outline" {...mintStyle}>
                     Write for Us <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </MagneticButton>

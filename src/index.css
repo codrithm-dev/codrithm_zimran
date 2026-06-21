@@ -193,8 +193,12 @@
   }
 
   .light body, body.light {
-    background: radial-gradient(ellipse at top, #EEF4FF 0%, #F5F8FF 60%);
-  }
+          /* background: radial-gradient(ellipse at top, #EEF4FF 0%, #F5F8FF 60%); */
+    /* background: radial-gradient(ellipse at top, #D6E4FF 0%, #F0F5FF 70%); */
+  /* background: radial-gradient(ellipse 100% 50% at top, #B8D0FF 0%, #F0F5FF 60%); */
+/* background: radial-gradient(ellipse 120% 60% at top left, #B8D0FF 0%, #C8F0D8 40%, #F0F5FF 70%); */
+background: linear-gradient(180deg, #B8D0FF 0%, #C8F0D8 30%, #F0F5FF 60%, #EEF4FF 100%);
+}
 }
 
 @layer utilities {

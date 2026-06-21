@@ -12,6 +12,7 @@ import { MagneticButton } from "@/components/MagneticButton";
 import { GradientPulse } from "@/components/GradientPulse";
 import { PRODUCTS } from "@/data/products";
 import { useTheme } from '@/components/theme-provider';
+import { useMintStyle } from "@/components/MintButton";
 
 export default function Home() {
   const { theme } = useTheme();
@@ -21,6 +22,7 @@ export default function Home() {
   const cardBorder = isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)';
   const cardBorderHover = isDark ? '1px solid rgba(43,100,217,0.6)' : '1px solid rgba(43,100,217,0.7)';
   const cardText = isDark ? '#FFFFFF' : '#1a2a4a';
+  const mintStyle = useMintStyle();
 
   return (
     <PageTransition>
@@ -79,7 +81,7 @@ export default function Home() {
             <div className="text-center mt-8">
               <MagneticButton pullDistance={10}>
                 <Link href="/products">
-                  <Button variant="outline">
+                  <Button variant="outline" {...mintStyle}>
                     View All Products <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>
@@ -109,7 +111,7 @@ export default function Home() {
                     </MagneticButton>
                     <MagneticButton pullDistance={12}>
                       <Link href="/about">
-                        <Button size="lg" variant="outline" className="text-base px-8 cursor-pointer">
+                        <Button size="lg" variant="outline" className="text-base px-8 cursor-pointer" {...mintStyle}>
                           Learn About Us
                         </Button>
                       </Link>
