@@ -51,9 +51,11 @@ export default function Projects() {
             <GsapTextReveal as="h1" className="text-4xl sm:text-5xl font-black mb-4">
               Our Projects
             </GsapTextReveal>
-            <p className="text-lg text-muted-foreground max-w-2xl">
-              Open-source projects and community-driven initiatives built by Codrithm.
-            </p>
+            <GsapReveal delay={0.15}>
+              <p className="text-lg text-muted-foreground max-w-2xl">
+                Open-source projects and community-driven initiatives built by Codrithm.
+              </p>
+            </GsapReveal>
           </div>
         </section>
 

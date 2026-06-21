@@ -2,8 +2,8 @@ import { useRef } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { TechStack } from "@/components/sections/TechStack";
+import { OurTeam } from "@/components/sections/OurTeam";
 import { PageTransition } from "@/components/PageTransition";
-import { TEAM } from "@/data/team";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { GsapTextReveal } from "@/components/gsap/GsapTextReveal";
 import { GsapReveal } from "@/components/gsap/GsapReveal";
@@ -19,7 +19,6 @@ export default function About() {
   const cardText = isDark ? '#FFFFFF' : '#1a2a4a';
 
   const statsRef = useRef<HTMLDivElement>(null);
-  const teamRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -33,23 +32,6 @@ export default function About() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: statsRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
-
-      if (teamRef.current) {
-        const cards = teamRef.current.children;
-        gsap.from(cards, {
-          opacity: 0,
-          y: 30,
-          scale: 0.95,
-          duration: 0.5,
-          stagger: 0.08,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: teamRef.current,
             start: "top 85%",
             toggleActions: "play none none none",
           },
@@ -116,7 +98,7 @@ export default function About() {
                   code — they learn to build products that matter.
                 </p>
               </GsapReveal>
-              <GsapReveal delay={0.2}>
+              <GsapReveal delay={0.25}>
                 <p className="text-muted-foreground text-lg leading-relaxed">
                   Our dual focus on delivering professional software solutions and nurturing talent
                   means our students work on real projects, solve real problems, and graduate with
@@ -158,10 +140,12 @@ export default function About() {
                   <div className="text-xs text-primary font-medium mb-2">{member.role}</div>
                   <p className="text-sm" style={{ color: cardText }}>{member.bio}</p>
                 </div>
-              ))}
+              </GsapReveal>
             </div>
           </div>
         </section>
+
+        <OurTeam />
 
         <TechStack />
         <Footer />

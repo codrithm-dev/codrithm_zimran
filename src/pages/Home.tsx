@@ -78,7 +78,7 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="text-center mt-8">
+            <ScrollReveal delay={0.2} className="text-center mt-8">
               <MagneticButton pullDistance={10}>
                 <Link href="/products">
                   <Button variant="outline" {...mintStyle}>
@@ -86,7 +86,7 @@ export default function Home() {
                   </Button>
                 </Link>
               </MagneticButton>
-            </div>
+            </ScrollReveal>
           </div>
         </section>
 

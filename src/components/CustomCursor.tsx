@@ -1,94 +1,183 @@
-import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 
 const isTouchDevice =
   typeof window !== "undefined" &&
   ("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
-const springConfig = { stiffness: 300, damping: 25, mass: 0.5 };
-const hoverSelector =
+// Elements that trigger the "hover" (scale-up ring) state
+const interactiveSelector =
   "a, button, [role='button'], input, select, textarea, label, [data-cursor-hover]";
 
+// Elements that trigger the "text" cursor state
+const textSelector = "p, h1, h2, h3, h4, h5, h6, span, li, blockquote, [data-cursor-text]";
+
+// Spring configs
+const dotSpring   = { stiffness: 800, damping: 30, mass: 0.3 };
+const ringSpring  = { stiffness: 180, damping: 22, mass: 0.6 };
+const trailSpring = { stiffness: 80,  damping: 20, mass: 1.0 };
+
+type CursorState = "default" | "hover" | "text" | "clicking";
+
+// Trail dot positions
+const TRAIL_COUNT = 6;
+
+interface TrailDot {
+  id: number;
+  x: useMotionValue<number>;
+  y: useMotionValue<number>;
+  sx: ReturnType<typeof useSpring>;
+  sy: ReturnType<typeof useSpring>;
+}
+
 export function CustomCursor() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
+  const [state, setState]         = useState<CursorState>("default");
+  const [visible, setVisible]     = useState(false);
+  const [clicks, setClicks]       = useState<number[]>([]);
+  const idleTimer                 = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-  const cursorRingX = useMotionValue(-100);
-  const cursorRingY = useMotionValue(-100);
+  // Primary dot (instant follow)
+  const dotX = useMotionValue(-200);
+  const dotY = useMotionValue(-200);
 
-  const ringX = useSpring(cursorRingX, springConfig);
-  const ringY = useSpring(cursorRingY, springConfig);
+  // Ring (smooth follow)
+  const rawRingX = useMotionValue(-200);
+  const rawRingY = useMotionValue(-200);
+  const ringX = useSpring(rawRingX, ringSpring);
+  const ringY = useSpring(rawRingY, ringSpring);
+
+  // Build trail dots (each one follows the previous with increasing lag)
+  const trailDots = useRef<TrailDot[]>(
+    Array.from({ length: TRAIL_COUNT }, (_, i) => {
+      const x = useMotionValue(-200);
+      const y = useMotionValue(-200);
+      const lag = { stiffness: Math.max(30, trailSpring.stiffness - i * 18), damping: trailSpring.damping + i * 2, mass: trailSpring.mass + i * 0.15 };
+      return { id: i, x, y, sx: useSpring(x, lag), sy: useSpring(y, lag) };
+    })
+  ).current;
+
+  const resetIdle = useCallback(() => {
+    setVisible(true);
+    if (idleTimer.current) clearTimeout(idleTimer.current);
+    idleTimer.current = setTimeout(() => setVisible(false), 3000);
+  }, []);
 
   useEffect(() => {
     if (isTouchDevice) return;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-      cursorRingX.set(e.clientX);
-      cursorRingY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
+    const onMove = (e: MouseEvent) => {
+      dotX.set(e.clientX);
+      dotY.set(e.clientY);
+      rawRingX.set(e.clientX);
+      rawRingY.set(e.clientY);
+      trailDots.forEach((dot) => {
+        dot.x.set(e.clientX);
+        dot.y.set(e.clientY);
+      });
+      resetIdle();
     };
 
-    const handleMouseLeaveDocument = () => setIsVisible(false);
+    const onLeave = () => setVisible(false);
 
-    // Event delegation for hover state — no MutationObserver needed
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as Element;
-      if (target.matches(hoverSelector) || target.closest(hoverSelector)) {
-        setIsHovering(true);
+    const onOver = (e: MouseEvent) => {
+      const t = e.target as Element;
+      if (t.matches(interactiveSelector) || t.closest(interactiveSelector)) {
+        setState("hover");
+      } else if (t.matches(textSelector) || t.closest(textSelector)) {
+        setState("text");
+      } else {
+        setState("default");
       }
     };
-    const handleMouseOut = (e: MouseEvent) => {
+
+    const onOut = (e: MouseEvent) => {
       const related = e.relatedTarget as Element | null;
-      if (!related || !related.closest(hoverSelector)) {
-        setIsHovering(false);
+      if (!related || (!related.closest(interactiveSelector) && !related.closest(textSelector))) {
+        setState("default");
       }
     };
 
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseleave", handleMouseLeaveDocument);
-    document.addEventListener("mouseover", handleMouseOver);
-    document.addEventListener("mouseout", handleMouseOut);
+    const onDown = () => setState("clicking");
+    const onUp   = (e: MouseEvent) => {
+      // Re-evaluate state on mouseup
+      const t = document.elementFromPoint(e.clientX, e.clientY) as Element | null;
+      if (t?.matches(interactiveSelector) || t?.closest(interactiveSelector)) {
+        setState("hover");
+      } else {
+        setState("default");
+      }
+      // Trigger click burst
+      setClicks((prev) => [...prev, Date.now()]);
+      setTimeout(() => setClicks((prev) => prev.slice(1)), 600);
+    };
+
+    document.addEventListener("mousemove",  onMove);
+    document.addEventListener("mouseleave", onLeave);
+    document.addEventListener("mouseover",  onOver);
+    document.addEventListener("mouseout",   onOut);
+    document.addEventListener("mousedown",  onDown);
+    document.addEventListener("mouseup",    onUp);
 
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseleave", handleMouseLeaveDocument);
-      document.removeEventListener("mouseover", handleMouseOver);
-      document.removeEventListener("mouseout", handleMouseOut);
+      document.removeEventListener("mousemove",  onMove);
+      document.removeEventListener("mouseleave", onLeave);
+      document.removeEventListener("mouseover",  onOver);
+      document.removeEventListener("mouseout",   onOut);
+      document.removeEventListener("mousedown",  onDown);
+      document.removeEventListener("mouseup",    onUp);
+      if (idleTimer.current) clearTimeout(idleTimer.current);
     };
-    // useState setters and useMotionValue objects are stable — safe with empty deps.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [resetIdle]);
 
   if (isTouchDevice) return null;
 
+  // Derived ring size / color per state
+  const ringSize =
+    state === "hover"    ? 48 :
+    state === "text"     ? 56 :
+    state === "clicking" ? 20 :
+                            28;
+
+  const ringBorder =
+    state === "hover"
+      ? "hsl(var(--primary))"
+      : state === "text"
+      ? "hsl(var(--secondary))"
+      : "hsl(var(--foreground) / 0.25)";
+
+  const dotSize =
+    state === "clicking" ? 4 :
+    state === "hover"    ? 6 :
+                            5;
+
   return (
     <>
-      {/* Dot — follows cursor exactly */}
-      <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
-        style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-      >
+      {/* ── Trail dots ─────────────────────────────────────────── */}
+      {trailDots.map((dot, i) => (
         <motion.div
-          animate={{
-            width: isHovering ? 8 : 6,
-            height: isHovering ? 8 : 6,
-            opacity: isVisible ? 1 : 0,
+          key={dot.id}
+          className="fixed top-0 left-0 pointer-events-none z-[9995] rounded-full"
+          style={{
+            x: dot.sx,
+            y: dot.sy,
+            translateX: "-50%",
+            translateY: "-50%",
+            width: Math.max(2, dotSize - 1 - i * 0.4),
+            height: Math.max(2, dotSize - 1 - i * 0.4),
+            opacity: visible ? (0.35 - i * 0.05) : 0,
+            backgroundColor:
+              state === "hover"
+                ? "hsl(var(--primary))"
+                : state === "text"
+                ? "hsl(var(--secondary))"
+                : "hsl(var(--foreground) / 0.5)",
+            transition: "background-color 0.2s, opacity 0.3s",
           }}
-          transition={{ duration: 0.15 }}
-          className="rounded-full bg-white"
         />
-      </motion.div>
+      ))}
 
-      {/* Ring — follows with spring animation */}
+      {/* ── Ring ───────────────────────────────────────────────── */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9998]"
         style={{
@@ -100,18 +189,62 @@ export function CustomCursor() {
       >
         <motion.div
           animate={{
-            width: isHovering ? 40 : 28,
-            height: isHovering ? 40 : 28,
-            opacity: isVisible ? 1 : 0,
-            borderColor: isHovering
-              ? "hsl(var(--primary))"
-              : "hsl(var(--foreground) / 0.3)",
+            width:   ringSize,
+            height:  ringSize,
+            opacity: visible ? (state === "clicking" ? 0.5 : 1) : 0,
+            borderColor: ringBorder,
+            scale: state === "clicking" ? 0.85 : 1,
+            rotate: state === "hover" ? 45 : 0,
           }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
           className="rounded-full border"
-          style={{ borderWidth: 1.5 }}
+          style={{ borderWidth: state === "text" ? 1 : 1.5 }}
         />
       </motion.div>
+
+      {/* ── Primary dot ────────────────────────────────────────── */}
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+        style={{
+          x: dotX,
+          y: dotY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+      >
+        <motion.div
+          animate={{
+            width:   dotSize,
+            height:  dotSize,
+            opacity: visible ? 1 : 0,
+            scale:   state === "clicking" ? 0.6 : 1,
+          }}
+          transition={{ duration: 0.12 }}
+          className="rounded-full bg-white"
+        />
+      </motion.div>
+
+      {/* ── Click burst rings ──────────────────────────────────── */}
+      <AnimatePresence>
+        {clicks.map((id) => (
+          <motion.div
+            key={id}
+            className="fixed top-0 left-0 pointer-events-none z-[9997] rounded-full border"
+            style={{
+              x: dotX,
+              y: dotY,
+              translateX: "-50%",
+              translateY: "-50%",
+              borderColor: "hsl(var(--primary))",
+              borderWidth: 1.5,
+            }}
+            initial={{ width: 10, height: 10, opacity: 0.9 }}
+            animate={{ width: 60, height: 60, opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
+          />
+        ))}
+      </AnimatePresence>
     </>
   );
 }

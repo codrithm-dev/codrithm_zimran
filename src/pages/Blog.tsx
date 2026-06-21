@@ -56,9 +56,11 @@ export default function Blog() {
             <GsapTextReveal as="h1" className="text-4xl sm:text-5xl font-black mb-4">
               Our Blog
             </GsapTextReveal>
-            <p className="text-lg text-muted-foreground max-w-2xl">
-              Insights, tutorials, and perspectives from our engineering and design teams.
-            </p>
+            <GsapReveal delay={0.15}>
+              <p className="text-lg text-muted-foreground max-w-2xl">
+                Insights, tutorials, and perspectives from our engineering and design teams.
+              </p>
+            </GsapReveal>
           </div>
         </section>
 

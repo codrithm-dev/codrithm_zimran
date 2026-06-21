@@ -106,7 +106,7 @@ export default function AdminDashboard() {
                           <td className="py-3 px-3">
                             <div className="flex items-center gap-2">
                               <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary">
-                                {user.name.split(" ").map(n => n[0]).join("")}
+                                {user.name ? user.name.split(" ").map(n => n[0]).join("") : "?"}
                               </div>
                               <span className="font-medium text-xs">{user.name}</span>
                             </div>

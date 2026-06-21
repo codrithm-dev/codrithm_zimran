@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { CustomCursor } from "@/components/CustomCursor";
 import { PageLoader } from "@/components/PageLoader";
 import { ScrollProgressBar } from "@/components/ScrollProgressBar";
+import SplashCursor from "@/components/SplashCursor";
 
 import Home from "@/pages/Home";
 import About from "@/pages/About";
@@ -49,6 +50,17 @@ function App() {
           </WouterRouter>
           <Toaster />
           <CustomCursor />
+          <SplashCursor
+            RAINBOW_MODE={false}
+            COLOR="#87FFBC"
+            DENSITY_DISSIPATION={3.5}
+            VELOCITY_DISSIPATION={2}
+            SPLAT_RADIUS={0.2}
+            SPLAT_FORCE={6000}
+            CURL={3}
+            SHADING={true}
+            TRANSPARENT={true}
+          />
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>
