@@ -7,8 +7,17 @@ import { TEAM } from "@/data/team";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { GsapTextReveal } from "@/components/gsap/GsapTextReveal";
 import { GsapReveal } from "@/components/gsap/GsapReveal";
+import { useTheme } from '@/components/theme-provider';
 
 export default function About() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const cardBg = isDark ? '#0D1B2A' : '#EEF4FF';
+  const cardBgHover = isDark ? '#112240' : '#DCE8FF';
+  const cardBorder = isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)';
+  const cardBorderHover = isDark ? '1px solid rgba(43,100,217,0.6)' : '1px solid rgba(43,100,217,0.7)';
+  const cardText = isDark ? '#FFFFFF' : '#1a2a4a';
+
   const statsRef = useRef<HTMLDivElement>(null);
   const teamRef = useRef<HTMLDivElement>(null);
 
@@ -80,13 +89,13 @@ export default function About() {
                 <div
                   key={stat.label}
                   className="rounded-xl p-6 hover:shadow-lg"
-                  style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                  style={{ background: cardBg, border: cardBorder, transition: "all 0.3s ease" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBgHover; (e.currentTarget as HTMLDivElement).style.border = cardBorderHover; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBg; (e.currentTarget as HTMLDivElement).style.border = cardBorder; }}
                 >
                   <div className="text-3xl font-black text-gradient mb-1">{stat.number}</div>
                   <div className="font-semibold text-sm mb-1" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{stat.label}</div>
-                  <div className="text-xs" style={{ color: "#FFFFFF" }}>{stat.desc}</div>
+                  <div className="text-xs" style={{ color: cardText }}>{stat.desc}</div>
                 </div>
               ))}
             </div>
@@ -136,9 +145,9 @@ export default function About() {
                 <div
                   key={member.id}
                   className="rounded-xl p-6 text-center hover:-translate-y-1 hover:shadow-lg"
-                  style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                  style={{ background: cardBg, border: cardBorder, transition: "all 0.3s ease" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBgHover; (e.currentTarget as HTMLDivElement).style.border = cardBorderHover; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBg; (e.currentTarget as HTMLDivElement).style.border = cardBorder; }}
                 >
                   <img
                     src={member.avatar}
@@ -147,7 +156,7 @@ export default function About() {
                   />
                   <h3 className="font-semibold" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{member.name}</h3>
                   <div className="text-xs text-primary font-medium mb-2">{member.role}</div>
-                  <p className="text-sm" style={{ color: "#FFFFFF" }}>{member.bio}</p>
+                  <p className="text-sm" style={{ color: cardText }}>{member.bio}</p>
                 </div>
               ))}
             </div>

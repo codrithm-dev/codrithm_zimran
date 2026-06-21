@@ -9,9 +9,17 @@ import { MagneticButton } from "@/components/MagneticButton";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { GsapTextReveal } from "@/components/gsap/GsapTextReveal";
 import { GsapReveal } from "@/components/gsap/GsapReveal";
+import { useTheme } from '@/components/theme-provider';
 
 export default function Blog() {
   const gridRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const cardBg = isDark ? '#0D1B2A' : '#EEF4FF';
+  const cardBgHover = isDark ? '#112240' : '#DCE8FF';
+  const cardBorder = isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)';
+  const cardBorderHover = isDark ? '1px solid rgba(43,100,217,0.6)' : '1px solid rgba(43,100,217,0.7)';
+  const cardText = isDark ? '#FFFFFF' : '#1a2a4a';
 
   useGSAP(
     () => {
@@ -58,9 +66,9 @@ export default function Blog() {
                 <article
                   key={post.id}
                   className="rounded-xl overflow-hidden h-full flex flex-col hover:-translate-y-1 hover:shadow-lg"
-                  style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#112240"; (e.currentTarget as HTMLElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                  style={{ background: cardBg, border: cardBorder, transition: "all 0.3s ease" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = cardBgHover; (e.currentTarget as HTMLElement).style.border = cardBorderHover; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = cardBg; (e.currentTarget as HTMLElement).style.border = cardBorder; }}
                 >
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center gap-2 mb-3">
@@ -69,8 +77,8 @@ export default function Blog() {
                       </span>
                     </div>
                     <h2 className="font-semibold mb-2" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{post.title}</h2>
-                    <p className="text-sm mb-4 flex-1" style={{ color: "#FFFFFF" }}>{post.excerpt}</p>
-                    <div className="flex items-center justify-between text-xs" style={{ color: "#FFFFFF" }}>
+                    <p className="text-sm mb-4 flex-1" style={{ color: cardText }}>{post.excerpt}</p>
+                    <div className="flex items-center justify-between text-xs" style={{ color: cardText }}>
                       <div className="flex items-center gap-3">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-3 h-3" />

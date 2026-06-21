@@ -15,6 +15,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { ParallaxBackground } from "@/components/ParallaxBackground";
 import { CAREERS, CAREER_TYPES } from "@/data/careers";
 import type { Career } from "@/data/careers";
+import { useTheme } from '@/components/theme-provider';
 
 const applicationSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -29,6 +30,13 @@ type ApplicationData = z.infer<typeof applicationSchema>;
 export default function Careers() {
   const [activeType, setActiveType] = useState("All");
   const [selectedJob, setSelectedJob] = useState<Career | null>(null);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const cardBg = isDark ? '#0D1B2A' : '#EEF4FF';
+  const cardBgHover = isDark ? '#112240' : '#DCE8FF';
+  const cardBorder = isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)';
+  const cardBorderHover = isDark ? '1px solid rgba(43,100,217,0.6)' : '1px solid rgba(43,100,217,0.7)';
+  const cardText = isDark ? '#FFFFFF' : '#1a2a4a';
 
   const filtered = CAREERS.filter(
     (career) => activeType === "All" || career.employmentType === activeType
@@ -121,12 +129,12 @@ export default function Careers() {
                           : ""
                       }`}
                       style={{
-                        background: selectedJob?.id === career.id ? "#112240" : "#0D1B2A",
-                        border: selectedJob?.id === career.id ? "1px solid rgba(43,100,217,0.6)" : "1px solid rgba(43,100,217,0.2)",
+                        background: selectedJob?.id === career.id ? cardBgHover : cardBg,
+                        border: selectedJob?.id === career.id ? cardBorderHover : cardBorder,
                         transition: "all 0.3s ease",
                       }}
-                      onMouseEnter={(e) => { if (selectedJob?.id !== career.id) { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; } }}
-                      onMouseLeave={(e) => { if (selectedJob?.id !== career.id) { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; } }}
+                      onMouseEnter={(e) => { if (selectedJob?.id !== career.id) { (e.currentTarget as HTMLDivElement).style.background = cardBgHover; (e.currentTarget as HTMLDivElement).style.border = cardBorderHover; } }}
+                      onMouseLeave={(e) => { if (selectedJob?.id !== career.id) { (e.currentTarget as HTMLDivElement).style.background = cardBg; (e.currentTarget as HTMLDivElement).style.border = cardBorder; } }}
                     >
                       <div className="flex items-start justify-between mb-2">
                         <h3 className="font-bold" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{career.title}</h3>
@@ -134,8 +142,8 @@ export default function Careers() {
                           {career.employmentType}
                         </span>
                       </div>
-                      <p className="text-sm mb-3 line-clamp-2" style={{ color: "#FFFFFF" }}>{career.description}</p>
-                      <div className="flex items-center gap-4 text-xs" style={{ color: "#FFFFFF" }}>
+                      <p className="text-sm mb-3 line-clamp-2" style={{ color: cardText }}>{career.description}</p>
+                      <div className="flex items-center gap-4 text-xs" style={{ color: cardText }}>
                         <span className="flex items-center gap-1"><Briefcase className="w-3 h-3" />{career.department}</span>
                         <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{career.location}</span>
                         <span className="flex items-center gap-1"><Clock className="w-3 h-3" />Posted {career.postedDate}</span>
@@ -165,7 +173,7 @@ export default function Careers() {
               <ScrollReveal delay={0.2}>
                 <div
                     className="rounded-xl p-6 sticky top-24"
-                    style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+                    style={{ background: cardBg, border: cardBorder, transition: "all 0.3s ease" }}
                   >
                   <h2 className="text-lg font-bold mb-4" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                     {selectedJob ? `Apply for ${selectedJob.title}` : "Quick Application"}

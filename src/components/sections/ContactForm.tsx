@@ -3,6 +3,7 @@ import { Send, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { GsapTextReveal } from "@/components/gsap/GsapTextReveal";
+import { useTheme } from "@/components/theme-provider";
 
 export function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -11,6 +12,14 @@ export function ContactForm() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
+
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const cardBg = isDark ? '#0D1B2A' : '#EEF4FF';
+  const cardBgHover = isDark ? '#112240' : '#DCE8FF';
+  const cardBorder = isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)';
+  const cardBorderHover = isDark ? '1px solid rgba(43,100,217,0.6)' : '1px solid rgba(43,100,217,0.7)';
+  const cardText = isDark ? '#FFFFFF' : '#1a2a4a';
 
   useGSAP(
     () => {
@@ -89,16 +98,16 @@ export function ContactForm() {
                 <div
                     key={label}
                     className="flex items-start gap-4 rounded-xl p-4"
-                    style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                    style={{ background: cardBg, border: cardBorder, transition: "all 0.3s ease" }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBgHover; (e.currentTarget as HTMLDivElement).style.border = cardBorderHover; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBg; (e.currentTarget as HTMLDivElement).style.border = cardBorder; }}
                   >
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                     <Icon className="w-5 h-5 text-primary" />
                   </div>
                   <div>
                     <div className="text-sm font-medium" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{label}</div>
-                    <div className="text-sm" style={{ color: "#FFFFFF" }}>{value}</div>
+                    <div className="text-sm" style={{ color: cardText }}>{value}</div>
                   </div>
                 </div>
               ))}
@@ -106,7 +115,7 @@ export function ContactForm() {
           </div>
 
           <div ref={rightRef}>
-            <form onSubmit={handleSubmit} className="rounded-xl p-6 space-y-4" style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)" }}>
+            <form onSubmit={handleSubmit} className="rounded-xl p-6 space-y-4" style={{ background: cardBg, border: cardBorder }}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="form-field">
                   <label className="text-sm font-medium mb-1.5 block">Name</label>

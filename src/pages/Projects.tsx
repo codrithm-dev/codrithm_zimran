@@ -6,8 +6,17 @@ import { PROJECTS } from "@/data/projects";
 import { Github, ExternalLink } from "lucide-react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { GsapTextReveal } from "@/components/gsap/GsapTextReveal";
+import { useTheme } from '@/components/theme-provider';
 
 export default function Projects() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const cardBg = isDark ? '#0D1B2A' : '#EEF4FF';
+  const cardBgHover = isDark ? '#112240' : '#DCE8FF';
+  const cardBorder = isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)';
+  const cardBorderHover = isDark ? '1px solid rgba(43,100,217,0.6)' : '1px solid rgba(43,100,217,0.7)';
+  const cardText = isDark ? '#FFFFFF' : '#1a2a4a';
+
   const gridRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -55,9 +64,9 @@ export default function Projects() {
                 <div
                   key={project.id}
                   className="rounded-xl p-6 h-full flex flex-col hover:-translate-y-1 hover:shadow-lg"
-                  style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                  style={{ background: cardBg, border: cardBorder, transition: "all 0.3s ease" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBgHover; (e.currentTarget as HTMLDivElement).style.border = cardBorderHover; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBg; (e.currentTarget as HTMLDivElement).style.border = cardBorder; }}
                 >
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
@@ -87,7 +96,7 @@ export default function Projects() {
                     </div>
                   </div>
                   <h3 className="font-semibold mb-2" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{project.title}</h3>
-                  <p className="text-sm mb-4 flex-1" style={{ color: "#FFFFFF" }}>{project.description}</p>
+                  <p className="text-sm mb-4 flex-1" style={{ color: cardText }}>{project.description}</p>
                   <div className="flex flex-wrap gap-1.5 mt-auto">
                     {project.techStack.map((tech) => (
                       <span

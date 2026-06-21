@@ -1,19 +1,22 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { useTheme } from '@/components/theme-provider'
 
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, style, onMouseEnter, onMouseLeave, ...props }, ref) => {
   const [hovered, setHovered] = React.useState(false);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
   return (
     <div
       ref={ref}
       className={cn("rounded-xl shadow transition-all duration-300", className)}
       style={{
-        background: hovered ? "#112240" : "#0D1B2A",
-        border: hovered ? "1px solid rgba(43,100,217,0.6)" : "1px solid rgba(43,100,217,0.2)",
+        background: hovered ? (isDark ? '#112240' : '#DCE8FF') : (isDark ? '#0D1B2A' : '#EEF4FF'),
+        border: hovered ? (isDark ? '1px solid rgba(43,100,217,0.6)' : '1px solid rgba(43,100,217,0.7)') : (isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)'),
         ...style,
       }}
       onMouseEnter={(e) => { setHovered(true); onMouseEnter?.(e); }}

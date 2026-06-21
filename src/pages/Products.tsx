@@ -7,8 +7,17 @@ import { ExternalLink } from "lucide-react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { GsapTextReveal } from "@/components/gsap/GsapTextReveal";
 import { CardTilt } from "@/components/CardTilt";
+import { useTheme } from '@/components/theme-provider';
 
 export default function Products() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const cardBg = isDark ? '#0D1B2A' : '#EEF4FF';
+  const cardBgHover = isDark ? '#112240' : '#DCE8FF';
+  const cardBorder = isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)';
+  const cardBorderHover = isDark ? '1px solid rgba(43,100,217,0.6)' : '1px solid rgba(43,100,217,0.7)';
+  const cardText = isDark ? '#FFFFFF' : '#1a2a4a';
+
   const gridRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -56,9 +65,9 @@ export default function Products() {
                 <CardTilt key={product.id}>
                   <div
                       className="rounded-xl p-8 h-full flex flex-col hover:shadow-lg"
-                      style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                      style={{ background: cardBg, border: cardBorder, transition: "all 0.3s ease" }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBgHover; (e.currentTarget as HTMLDivElement).style.border = cardBorderHover; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBg; (e.currentTarget as HTMLDivElement).style.border = cardBorder; }}
                     >
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-xl font-bold" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{product.name}</h3>
@@ -86,10 +95,10 @@ export default function Products() {
                         )}
                       </div>
                     </div>
-                    <p className="text-sm mb-6" style={{ color: "#FFFFFF" }}>{product.description}</p>
+                    <p className="text-sm mb-6" style={{ color: cardText }}>{product.description}</p>
                     <ul className="space-y-2 mt-auto">
                       {product.features.map((f) => (
-                        <li key={f} className="text-sm flex items-center gap-2" style={{ color: "#FFFFFF" }}>
+                        <li key={f} className="text-sm flex items-center gap-2" style={{ color: cardText }}>
                           <div className="w-1.5 h-1.5 rounded-full bg-primary/50" />
                           {f}
                         </li>

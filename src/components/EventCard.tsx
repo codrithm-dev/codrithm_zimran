@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { Calendar, Users, MapPin, Clock } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Users, MapPin, Clock } from "lucide-react";
 import type { Event } from "@/data/events";
+import { useTheme } from "@/components/theme-provider";
 
 interface EventCardProps {
   event: Event;
@@ -17,6 +17,8 @@ const TYPE_COLORS: Record<string, string> = {
 };
 
 export function EventCard({ event, delay = 0 }: EventCardProps) {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
   const date = new Date(event.date);
   const dateStr = date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   const timeStr = date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
@@ -29,10 +31,10 @@ export function EventCard({ event, delay = 0 }: EventCardProps) {
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay }}
       whileHover={{ x: 4 }}
-      style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
+      style={{ background: isDark ? '#0D1B2A' : '#EEF4FF', border: isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)', transition: "all 0.3s ease" }}
       className="rounded-xl p-4 group hover:shadow-lg"
-      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
-      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = isDark ? '#112240' : '#DCE8FF'; (e.currentTarget as HTMLDivElement).style.border = isDark ? '1px solid rgba(43,100,217,0.6)' : '1px solid rgba(43,100,217,0.7)'; }}
+      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = isDark ? '#0D1B2A' : '#EEF4FF'; (e.currentTarget as HTMLDivElement).style.border = isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)'; }}
       data-testid={`card-event-${event.id}`}
     >
       <div className="flex items-start gap-3">
@@ -55,7 +57,7 @@ export function EventCard({ event, delay = 0 }: EventCardProps) {
             </span>
           </div>
 
-          <div className="flex flex-wrap gap-2 text-xs" style={{ color: "#FFFFFF" }}>
+          <div className="flex flex-wrap gap-2 text-xs" style={{ color: isDark ? '#FFFFFF' : '#1a2a4a' }}>
             <span className="flex items-center gap-1">
               <Clock className="w-3 h-3" /> {timeStr}
             </span>

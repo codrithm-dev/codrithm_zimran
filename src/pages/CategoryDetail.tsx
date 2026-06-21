@@ -11,6 +11,7 @@ import { PageTransition } from "@/components/PageTransition";
 import { ParallaxBackground } from "@/components/ParallaxBackground";
 import { ParallaxSection } from "@/components/ParallaxSection";
 import { CATEGORIES } from "@/data/categories";
+import { useTheme } from '@/components/theme-provider';
 
 const DIFFICULTY_COLORS: Record<string, string> = {
   Beginner: "text-emerald-400 border-emerald-400/30 bg-emerald-400/10",
@@ -21,6 +22,13 @@ const DIFFICULTY_COLORS: Record<string, string> = {
 export default function CategoryDetail() {
   const { id } = useParams<{ id: string }>();
   const category = CATEGORIES.find((c) => c.id === id);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const cardBg = isDark ? '#0D1B2A' : '#EEF4FF';
+  const cardBgHover = isDark ? '#112240' : '#DCE8FF';
+  const cardBorder = isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)';
+  const cardBorderHover = isDark ? '1px solid rgba(43,100,217,0.6)' : '1px solid rgba(43,100,217,0.7)';
+  const cardText = isDark ? '#FFFFFF' : '#1a2a4a';
 
   if (!category) {
     return (
@@ -120,9 +128,9 @@ export default function CategoryDetail() {
               <ScrollReveal>
                 <div
                     className="rounded-xl p-6 hover:shadow-lg"
-                    style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                    style={{ background: cardBg, border: cardBorder, transition: "all 0.3s ease" }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBgHover; (e.currentTarget as HTMLDivElement).style.border = cardBorderHover; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBg; (e.currentTarget as HTMLDivElement).style.border = cardBorder; }}
                   >
                   <h2 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                     <BookOpen className="w-5 h-5 text-primary" />
@@ -153,9 +161,9 @@ export default function CategoryDetail() {
                 <ScrollReveal delay={0.1}>
                   <div
                       className="rounded-xl p-6 hover:shadow-lg"
-                      style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                      style={{ background: cardBg, border: cardBorder, transition: "all 0.3s ease" }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBgHover; (e.currentTarget as HTMLDivElement).style.border = cardBorderHover; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBg; (e.currentTarget as HTMLDivElement).style.border = cardBorder; }}
                     >
                     <h2 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                       <Code2 className="w-5 h-5 text-secondary" />
@@ -196,9 +204,9 @@ export default function CategoryDetail() {
               <ScrollReveal delay={0.2}>
                 <div
                     className="rounded-xl p-6 hover:shadow-lg"
-                    style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                    style={{ background: cardBg, border: cardBorder, transition: "all 0.3s ease" }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBgHover; (e.currentTarget as HTMLDivElement).style.border = cardBorderHover; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBg; (e.currentTarget as HTMLDivElement).style.border = cardBorder; }}
                   >
                   <h3 className="font-semibold mb-4" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Community Stats</h3>
                   {[

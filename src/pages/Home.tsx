@@ -11,8 +11,17 @@ import { PageTransition } from "@/components/PageTransition";
 import { MagneticButton } from "@/components/MagneticButton";
 import { GradientPulse } from "@/components/GradientPulse";
 import { PRODUCTS } from "@/data/products";
+import { useTheme } from '@/components/theme-provider';
 
 export default function Home() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const cardBg = isDark ? '#0D1B2A' : '#EEF4FF';
+  const cardBgHover = isDark ? '#112240' : '#DCE8FF';
+  const cardBorder = isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)';
+  const cardBorderHover = isDark ? '1px solid rgba(43,100,217,0.6)' : '1px solid rgba(43,100,217,0.7)';
+  const cardText = isDark ? '#FFFFFF' : '#1a2a4a';
+
   return (
     <PageTransition>
       <div className="min-h-screen flex flex-col">
@@ -35,9 +44,9 @@ export default function Home() {
                 <ScrollReveal key={product.id} delay={i * 0.1}>
                   <div
                       className="rounded-xl p-6 h-full hover:shadow-lg"
-                      style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                      style={{ background: cardBg, border: cardBorder, transition: "all 0.3s ease" }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBgHover; (e.currentTarget as HTMLDivElement).style.border = cardBorderHover; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = cardBg; (e.currentTarget as HTMLDivElement).style.border = cardBorder; }}
                     >
                     <div className="flex items-center gap-2 mb-3">
                       <h3 className="font-semibold" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{product.name}</h3>
@@ -53,10 +62,10 @@ export default function Home() {
                         {product.status}
                       </span>
                     </div>
-                    <p className="text-sm mb-4" style={{ color: "#FFFFFF" }}>{product.description}</p>
+                    <p className="text-sm mb-4" style={{ color: cardText }}>{product.description}</p>
                     <ul className="space-y-1">
                       {product.features.slice(0, 3).map((f) => (
-                        <li key={f} className="text-xs flex items-center gap-1.5" style={{ color: "#FFFFFF" }}>
+                        <li key={f} className="text-xs flex items-center gap-1.5" style={{ color: cardText }}>
                           <div className="w-1 h-1 rounded-full bg-primary/50" />
                           {f}
                         </li>

@@ -6,9 +6,12 @@ import { TEAM } from "@/data/team";
 import { Github, Linkedin, Twitter } from "lucide-react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { GsapTextReveal } from "@/components/gsap/GsapTextReveal";
+import { useTheme } from "@/components/theme-provider";
 
 export default function Team() {
   const gridRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   useGSAP(
     () => {
@@ -59,9 +62,9 @@ export default function Team() {
                 <div
                   key={member.id}
                   className="rounded-xl p-8 text-center hover:-translate-y-1 hover:shadow-lg"
-                  style={{ background: "#0D1B2A", border: "1px solid rgba(43,100,217,0.2)", transition: "all 0.3s ease" }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#112240"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.6)"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "#0D1B2A"; (e.currentTarget as HTMLDivElement).style.border = "1px solid rgba(43,100,217,0.2)"; }}
+                  style={{ background: isDark ? '#0D1B2A' : '#EEF4FF', border: isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)', transition: "all 0.3s ease" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = isDark ? '#112240' : '#DCE8FF'; (e.currentTarget as HTMLDivElement).style.border = isDark ? '1px solid rgba(43,100,217,0.6)' : '1px solid rgba(43,100,217,0.7)'; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = isDark ? '#0D1B2A' : '#EEF4FF'; (e.currentTarget as HTMLDivElement).style.border = isDark ? '1px solid rgba(43,100,217,0.2)' : '1px solid rgba(43,100,217,0.3)'; }}
                 >
                   <img
                     src={member.avatar}
@@ -70,7 +73,7 @@ export default function Team() {
                   />
                   <h3 className="font-semibold text-lg" style={{ background: "linear-gradient(to right, #8BECAE, #2B64D9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{member.name}</h3>
                   <div className="text-sm text-primary font-medium mb-3">{member.role}</div>
-                  <p className="text-sm mb-4" style={{ color: "#FFFFFF" }}>{member.bio}</p>
+                  <p className="text-sm mb-4" style={{ color: isDark ? '#FFFFFF' : '#1a2a4a' }}>{member.bio}</p>
                   {member.social && (
                     <div className="flex items-center justify-center gap-2">
                       {member.social.github && (
