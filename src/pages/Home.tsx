@@ -94,7 +94,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <ScrollReveal>
               <GradientPulse>
-                <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 rounded-2xl p-12">
+                <div className="rounded-2xl p-12" style={{ background: "linear-gradient(to bottom right, rgba(43,100,217,0.1), rgba(139,236,174,0.1))", border: "1px solid rgba(43,100,217,0.2)" }}>
                   <h2 className="text-4xl font-black mb-4">
                     Ready to <span className="text-gradient">build something?</span>
                   </h2>

@@ -10,9 +10,9 @@ export function GradientPulse({ children, className = "" }: GradientPulseProps) 
     <div className={`relative group ${className}`}>
       {/* Animated gradient border */}
       <div
-        className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        className="absolute -inset-[1px] rounded-2xl opacity-20 group-hover:opacity-80 transition-opacity duration-500"
         style={{
-          background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--primary)))",
+          background: "linear-gradient(135deg, rgba(43,100,217,0.6), rgba(139,236,174,0.4), rgba(43,100,217,0.6))",
           backgroundSize: "200% 200%",
           animation: "gradientShift 3s ease infinite",
         }}

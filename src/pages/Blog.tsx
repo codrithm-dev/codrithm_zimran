@@ -6,6 +6,7 @@ import { BLOGS } from "@/data/blogs";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/MagneticButton";
+import { GradientPulse } from "@/components/GradientPulse";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { GsapTextReveal } from "@/components/gsap/GsapTextReveal";
 import { GsapReveal } from "@/components/gsap/GsapReveal";
@@ -107,7 +108,8 @@ export default function Blog() {
         <section className="py-20 relative overflow-hidden">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <GsapReveal>
-              <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 rounded-2xl p-12">
+              <GradientPulse>
+                <div className="rounded-2xl p-12" style={{ background: "linear-gradient(to bottom right, rgba(43,100,217,0.1), rgba(139,236,174,0.1))", border: "1px solid rgba(43,100,217,0.2)" }}>
                 <h2 className="text-3xl font-black mb-4">
                   Want to <span className="text-gradient">contribute?</span>
                 </h2>
@@ -120,6 +122,7 @@ export default function Blog() {
                   </Button>
                 </MagneticButton>
               </div>
+              </GradientPulse>
             </GsapReveal>
           </div>
         </section>
