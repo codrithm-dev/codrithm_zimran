@@ -14,6 +14,7 @@ import { CardTilt } from "@/components/CardTilt";
 import { GsapTextReveal } from "@/components/gsap/GsapTextReveal";
 import { GsapReveal } from "@/components/gsap/GsapReveal";
 import { PROJECTS } from "@/data/projects";
+import ProjectShowcase from "@/components/ProjectShowcase/ProjectShowcase";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 export default function Home() {
@@ -105,6 +106,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── Selected Work marquee ── */}
+      <ProjectShowcase />
 
       <TechStack />
 
